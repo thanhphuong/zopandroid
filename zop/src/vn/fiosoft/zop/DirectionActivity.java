@@ -2,75 +2,79 @@ package vn.fiosoft.zop;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
 
-public class MainActivity extends MapActivity {
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 
+public class DirectionActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
-
-		// List<Overlay> mapOverlays = mapView.getOverlays();
-		// Drawable drawable =
-		// this.getResources().getDrawable(R.drawable.androidmarker);
-		// HelloItemizedOverlay itemizedoverlay = new
-		// HelloItemizedOverlay(drawable, this);
-		//
-		// GeoPoint point = new GeoPoint(19240000,-99120000);
-		// OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!",
-		// "I'm in Mexico City!");
-		//
-		// GeoPoint point2 = new GeoPoint(35410000, 139460000);
-		// OverlayItem overlayitem2 = new OverlayItem(point2,
-		// "Sekai, konichiwa!", "I'm in Japan!");
-		//
-		// itemizedoverlay.addOverlay(overlayitem);
-		// itemizedoverlay.addOverlay(overlayitem2);
-		// mapOverlays.add(itemizedoverlay);
-
-		MapController mapController = mapView.getController();
-
+		setContentView(R.layout.activity_direction);
 		ArrayList<GeoPoint> all_geo_points = getDirections(10.154929, 76.390316, 10.015861, 76.341867);
-		GeoPoint moveTo = all_geo_points.get(0);
-		mapController.animateTo(moveTo);
-		mapController.setZoom(12);
-		mapView.getOverlays().add(new MyOverlay(all_geo_points));
-
 	}
-
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
-
+	
+//	private static final String TAG = "MainActivity";
+//	private static final String URL = "http://www.gooogle.com:80";
+//
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.activity_direction);
+//
+//		// JSON object to hold the information, which is sent to the server
+//		JSONObject jsonObjSend = new JSONObject();
+//
+//		try {
+//			// Add key/value pairs
+//			jsonObjSend.put("key_1", "value_1");
+//			jsonObjSend.put("key_2", "value_2");
+//
+//			// Add a nested JSONObject (e.g. for header information)
+//			JSONObject header = new JSONObject();
+//			header.put("deviceType","Android"); // Device type
+//			header.put("deviceVersion","2.0"); // Device OS version
+//			header.put("language", "es-es");	// Language of the Android client
+//			jsonObjSend.put("header", header);
+//			
+//			// Output the JSON object we're sending to Logcat:
+//			Log.i(TAG, jsonObjSend.toString(2));
+//
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//
+//		// Send the HttpPostRequest and receive a JSONObject in return
+//		JSONObject jsonObjRecv = vn.fiosoft.zop.HttpClient.SendHttpPost(URL, jsonObjSend);
+//
+//		/*
+//		 *  From here on do whatever you want with your JSONObject, e.g.
+//		 *  1) Get the value for a key: jsonObjRecv.get("key");
+//		 *  2) Get a nested JSONObject: jsonObjRecv.getJSONObject("key")
+//		 *  3) Get a nested JSONArray: jsonObjRecv.getJSONArray("key") 
+//		 */
+//
+//
+//	}
+	
 	public ArrayList<GeoPoint> getDirections(final double lat1, final double lon1, final double lat2, final double lon2) {
 		String url = "http://maps.googleapis.com:80/maps/api/directions/xml?origin=" + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=metric";
 		String tag[] = { "lat", "lng" };
@@ -107,6 +111,4 @@ public class MainActivity extends MapActivity {
 
 		return list_of_geopoints;
 	}
-	
-
 }

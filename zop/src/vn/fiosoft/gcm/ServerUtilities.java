@@ -15,6 +15,8 @@
  */
 package vn.fiosoft.gcm;
 
+import android.content.Context;
+
 
 /**
  * Helper class used to communicate with the demo server.
@@ -30,7 +32,7 @@ public final class ServerUtilities {
      *
      * @return whether the registration succeeded or not.
      */
-//    static boolean register(final Context context, final String regId) {
+    public static boolean register(final Context context, final String regId) {
 //        Log.i(TAG, "registering device (regId = " + regId + ")");
 //        String serverUrl = SERVER_URL + "/register";
 //        Map<String, String> params = new HashMap<String, String>();
@@ -73,8 +75,8 @@ public final class ServerUtilities {
 //        String message = context.getString(R.string.server_register_error,
 //                MAX_ATTEMPTS);
 //        CommonUtilities.displayMessage(context, message);
-//        return false;
-//    }
+        return false;
+    }
 
     /**
      * Unregister this account/device pair within the server.

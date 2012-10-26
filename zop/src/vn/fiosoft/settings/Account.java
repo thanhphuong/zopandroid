@@ -8,8 +8,8 @@ public class Account {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private String gender;
-	private String birthday;
+	private int gender;
+	private long birthday;
 
 	public long getId() {
 		return id;
@@ -67,19 +67,19 @@ public class Account {
 		this.lastName = lastName;
 	}
 
-	public String getGender() {
+	public int getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 
-	public String getBirthday() {
+	public long getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(long birthday) {
 		this.birthday = birthday;
 	}
 

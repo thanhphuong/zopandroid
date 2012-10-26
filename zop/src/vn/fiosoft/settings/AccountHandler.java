@@ -2,14 +2,12 @@ package vn.fiosoft.settings;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class AccountStorage extends DefaultHandler {
+public class AccountHandler extends DefaultHandler {
 
-	private final String ACCOUNTS = "accounts";
 	private final String ACCOUNT = "account";
 	private final String ID = "id";
 	private final String PID = "pid";
@@ -29,9 +27,8 @@ public class AccountStorage extends DefaultHandler {
 		return accounts;
 	}
 
-	public AccountStorage() {
+	public AccountHandler() {
 		accounts = new ArrayList<Account>();
-		account = new Account();
 	}
 
 	public boolean saveAccount(Account account) {
@@ -52,16 +49,37 @@ public class AccountStorage extends DefaultHandler {
 	@Override
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
-
+		if (localName.equalsIgnoreCase(ACCOUNT)) {
+			account = new Account();
+		}
 	}
 
 	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
-		if (this.account != null){
-			
+		if (localName.equalsIgnoreCase(ACCOUNT)) {
+			accounts.add(account);
+		} else if (localName.equalsIgnoreCase(ID)) {
+			account.setId(Long.parseLong(builder.toString()));
+		} else if (localName.equalsIgnoreCase(PID)){
+			account.setPid(Long.parseLong(builder.toString()));
+		} else if (localName.equalsIgnoreCase(EMAIL)){
+			account.setEmail(builder.toString());
+		} else if (localName.equalsIgnoreCase(PHONE)){
+			account.setPhone(builder.toString());
+		} else if (localName.equalsIgnoreCase(PASSWORD)){
+			account.setPassword(builder.toString());
+		} else if (localName.equalsIgnoreCase(FIRST_NAME)){
+			account.setFirstName(builder.toString());
+		} else if (localName.equalsIgnoreCase(LAST_NAME)){
+			account.setLastName(builder.toString());
+		} else if (localName.equalsIgnoreCase(GENDER)){
+			account.setGender(Integer.parseInt(builder.toString()));
+		}else if (localName.equalsIgnoreCase(BIRTHDAY)){
+			account.setBirthday(Long.parseLong(builder.toString()));
 		}
-
+		
+		builder.setLength(0);
 	}
 
 	@Override

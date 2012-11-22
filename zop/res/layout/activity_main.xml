@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.maps.MapView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mapview"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clickable="true"    
-    android:apiKey="0VmYekii_sHSm-cDmOsiMlXDpdqMEQ0-Q0XKSfQ"    
-/>
+    android:layout_height="fill_parent" >
+
+    <com.google.android.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:apiKey="0VmYekii_sHSm-cDmOsiMlXDpdqMEQ0-Q0XKSfQ"
+        android:clickable="true" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"                
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/black_half_alpha"        
+        android:padding="5dp" 
+        >
+        <Button
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:paddingTop="10dp"           
+            android:text="Group"
+            android:textColor="#FFF"           
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"                
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/black_half_alpha"        
+        android:padding="5dp" 
+        >  
+
+        <Button
+            android:id="@+id/X"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:paddingTop="10dp"           
+            android:text="X"
+            android:textColor="#FFF"           
+            />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,10 +1,5 @@
 package vn.fiosoft.zop;
 
-import static com.google.android.gcm.demo.app.CommonUtilities.DISPLAY_MESSAGE_ACTION;
-import static com.google.android.gcm.demo.app.CommonUtilities.EXTRA_MESSAGE;
-import static com.google.android.gcm.demo.app.CommonUtilities.SENDER_ID;
-import static com.google.android.gcm.demo.app.CommonUtilities.SERVER_URL;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +25,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gcm.GCMRegistrar;
@@ -47,42 +45,51 @@ public class MainActivity extends MapActivity {
 
 	private AsyncTask<Void, Void, Void> mRegisterTask;
 
+	private Button mGroupName;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		startGCMService();
+		Typeface tf=Typeface.createFromAsset(getAssets(), "fonts/digital-7.ttf");
+		mGroupName = (Button)findViewById(R.id.group_name);
+		mGroupName.setTypeface(tf);
+		
+		
+		
+		//startGCMService();
 
 		MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
+		//mapView.setBuiltInZoomControls(true);		
+		 
 
-		// List<Overlay> mapOverlays = mapView.getOverlays();
-		// Drawable drawable =
-		// this.getResources().getDrawable(R.drawable.androidmarker);
-		// HelloItemizedOverlay itemizedoverlay = new
-		// HelloItemizedOverlay(drawable, this);
-		//
-		// GeoPoint point = new GeoPoint(19240000,-99120000);
-		// OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!",
-		// "I'm in Mexico City!");
-		//
-		// GeoPoint point2 = new GeoPoint(35410000, 139460000);
-		// OverlayItem overlayitem2 = new OverlayItem(point2,
-		// "Sekai, konichiwa!", "I'm in Japan!");
-		//
-		// itemizedoverlay.addOverlay(overlayitem);
-		// itemizedoverlay.addOverlay(overlayitem2);
-		// mapOverlays.add(itemizedoverlay);
+		List<Overlay> mapOverlays = mapView.getOverlays();
+		Drawable drawable = this.getResources().getDrawable(
+				R.drawable.ic_launcher);
+		HelloItemizedOverlay itemizedoverlay = new HelloItemizedOverlay(
+				drawable, this);
 
-		MapController mapController = mapView.getController();
+		GeoPoint point = new GeoPoint(19240000, -99120000);
+		OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!",
+				"I'm in Mexico City!");
 
-		ArrayList<GeoPoint> all_geo_points = getDirections(10.154929,
-				76.390316, 10.015861, 76.341867);
-		GeoPoint moveTo = all_geo_points.get(0);
-		mapController.animateTo(moveTo);
-		mapController.setZoom(12);
-		mapView.getOverlays().add(new MyOverlay(all_geo_points));
+		GeoPoint point2 = new GeoPoint(35410000, 139460000);
+		OverlayItem overlayitem2 = new OverlayItem(point2, "Sekai, konichiwa!",
+				"I'm in Japan!");
+
+		itemizedoverlay.addOverlay(overlayitem);
+		itemizedoverlay.addOverlay(overlayitem2);
+		mapOverlays.add(itemizedoverlay);
+
+		// MapController mapController = mapView.getController();
+		//
+		// ArrayList<GeoPoint> all_geo_points = getDirections(10.154929,
+		// 76.390316, 10.015861, 76.341867);
+		// GeoPoint moveTo = all_geo_points.get(0);
+		// mapController.animateTo(moveTo);
+		// mapController.setZoom(12);
+		// mapView.getOverlays().add(new MyOverlay(all_geo_points));
 
 	}
 
@@ -92,21 +99,22 @@ public class MainActivity extends MapActivity {
 	}
 
 	public void startGCMService() {
-		if (CommonUtilities.SERVER_URL == null || CommonUtilities.SENDER_ID == null)
+		if (CommonUtilities.SERVER_URL == null
+				|| CommonUtilities.SENDER_ID == null)
 			return;
-		
+
 		GCMRegistrar.checkDevice(this);
-		
+
 		GCMRegistrar.checkManifest(this);
-		
+
 		final String regId = GCMRegistrar.getRegistrationId(this);
-		if (regId.equals("")) {		
+		if (regId.equals("")) {
 			GCMRegistrar.register(this, CommonUtilities.SENDER_ID);
 		} else {
 			// Device is already registered on GCM, check server.
 			if (GCMRegistrar.isRegisteredOnServer(this)) {
 
-			} else {				
+			} else {
 				final Context context = this;
 				mRegisterTask = new AsyncTask<Void, Void, Void>() {
 

@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Group"
+                android:text="@string/name"
                 android:textColor="#FFF" />
         </LinearLayout>
 
@@ -51,40 +51,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_search" />
+            android:background="@drawable/map_button_bg"
+            android:src="@android:drawable/ic_menu_search"
+            android:contentDescription="@string/search" />
 
         <ImageButton
             android:id="@+id/directions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_search" />
+            android:background="@drawable/map_button_bg"
+            android:src="@android:drawable/ic_menu_directions" 
+            android:contentDescription="@string/directions"/>
 
         <ImageButton
             android:id="@+id/places"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_search" />
+            android:background="@drawable/map_button_bg"
+            android:src="@android:drawable/ic_menu_myplaces" 
+            android:contentDescription="@string/places"/>
 
         <ImageButton
             android:id="@+id/layers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_search" />
+            android:background="@drawable/map_button_bg"
+            android:src="@android:drawable/ic_menu_mapmode" 
+            android:contentDescription="@string/layers"/>
 
         <ImageButton
             android:id="@+id/more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_search" />
+            android:layout_weight="1"                        
+            android:background="@drawable/map_button_bg"
+            android:src="@android:drawable/ic_menu_mapmode"
+            android:contentDescription="@string/more" />
     </LinearLayout>
 
 </LinearLayout>

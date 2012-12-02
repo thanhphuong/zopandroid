@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:background="@drawable/map_button_bg"
             android:contentDescription="@string/search"
-            android:src="@android:drawable/ic_menu_search" />
+            android:src="@drawable/action_search" />
 
         <ImageButton
             android:id="@+id/directions"
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:background="@drawable/map_button_bg"
             android:contentDescription="@string/directions"
-            android:src="@android:drawable/ic_menu_directions" />
+            android:src="@drawable/location_directions" />
 
         <ImageButton
             android:id="@+id/places"
@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:background="@drawable/map_button_bg"
             android:contentDescription="@string/places"
-            android:src="@android:drawable/ic_menu_myplaces" />
+            android:src="@drawable/location_place" />
 
         <ImageButton
             android:id="@+id/layers"
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:background="@drawable/map_button_bg"
             android:contentDescription="@string/layers"
-            android:src="@android:drawable/ic_menu_mapmode" />
+            android:src="@drawable/location_map" />
 
         <ImageButton
             android:id="@+id/more"
@@ -93,7 +93,7 @@
             android:background="@drawable/map_button_bg"
             android:contentDescription="@string/more"
             android:scaleType="fitCenter"
-            android:src="@android:drawable/ic_menu_preferences" />
+            android:src="@drawable/ic_action_overflow" />
     </LinearLayout>
 
 </LinearLayout>

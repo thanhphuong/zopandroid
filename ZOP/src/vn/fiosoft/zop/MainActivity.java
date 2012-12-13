@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -71,6 +72,9 @@ public class MainActivity extends MapActivity {
 		mapController.animateTo(moveTo);
 		mapController.setZoom(12);
 		mapView.getOverlays().add(new MyOverlay(all_geo_points));
+		
+		JSONObject jsonObject =  vn.fiosoft.zop.HttpClient1.SendHttpPost("https://twitter.com/statuses/user_timeline/vogella.json", new JSONObject());		
+		
 
 	}
 

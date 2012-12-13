@@ -18,10 +18,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.Button;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -32,16 +30,10 @@ import com.google.android.maps.OverlayItem;
 
 public class MainActivity extends MapActivity {
 
-	private Button mGroupName;
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		Typeface tf=Typeface.createFromAsset(getAssets(), "fonts/digital-7.ttf");
-		mGroupName = (Button)findViewById(R.id.group_name);
-		mGroupName.setTypeface(tf);
 
 		MapView mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);

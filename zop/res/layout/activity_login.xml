@@ -1,13 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <TextView
+    <EditText 
+        android:id="@+id/youraccount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Account"
+        />
+    <EditText 
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        />
+    
+    <Button 
+        android:id="@+id/loign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        tools:context=".MainActivity" />
+        android:text="Login"
+        />
 
-</RelativeLayout>
+</LinearLayout>

@@ -18,12 +18,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import vn.fiosoft.settings.SettingActivity;
+
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -34,11 +39,13 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
-public class MainActivity extends MapActivity implements OnClickListener {
+public class MainActivity extends MapActivity implements OnClickListener, OnItemClickListener {
+
+	private boolean showPopupMenu;
 
 	private Button mGroupName;
 	private ImageButton mMoreButton;
-	private ListView mListView;
+	private ListView mPopupMenu;
 	private List<MoreMenuItem> items;
 
 	@Override
@@ -46,8 +53,7 @@ public class MainActivity extends MapActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/digital-7.ttf");
+		Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7.ttf");
 		mGroupName = (Button) findViewById(R.id.group_name);
 		mGroupName.setTypeface(tf);
 
@@ -74,31 +80,30 @@ public class MainActivity extends MapActivity implements OnClickListener {
 
 		MapController mapController = mapView.getController();
 
-		ArrayList<GeoPoint> all_geo_points = getDirections(10.154929,
-				76.390316, 10.015861, 76.341867);
+		ArrayList<GeoPoint> all_geo_points = getDirections(10.154929, 76.390316, 10.015861, 76.341867);
 		GeoPoint moveTo = all_geo_points.get(0);
 		mapController.animateTo(moveTo);
 		mapController.setZoom(12);
 		mapView.getOverlays().add(new MyOverlay(all_geo_points));
 
-		JSONObject jsonObject = vn.fiosoft.zop.HttpClient1.SendHttpPost(
-				"https://twitter.com/statuses/user_timeline/vogella.json",
-				new JSONObject());
+		JSONObject jsonObject = vn.fiosoft.zop.HttpClient1.SendHttpPost("https://twitter.com/statuses/user_timeline/vogella.json", new JSONObject());
 
 		// begin
 		mMoreButton = (ImageButton) findViewById(R.id.more);
 
 		mMoreButton.setOnClickListener(this);
 
-		mListView = (ListView) findViewById(R.id.more_list);
-		;
+		mPopupMenu = (ListView) findViewById(R.id.more_list);
+
+		mPopupMenu.setVisibility(View.GONE);
+		showPopupMenu = false;
 
 	}
-	
+
 	@Override
-	protected void onResume() {		
+	protected void onResume() {
 		super.onResume();
-		
+
 		refreshListAdapter();
 	}
 
@@ -107,17 +112,8 @@ public class MainActivity extends MapActivity implements OnClickListener {
 		return false;
 	}
 
-	public ArrayList<GeoPoint> getDirections(final double lat1,
-			final double lon1, final double lat2, final double lon2) {
-		String url = "http://maps.googleapis.com:80/maps/api/directions/xml?origin="
-				+ lat1
-				+ ","
-				+ lon1
-				+ "&destination="
-				+ lat2
-				+ ","
-				+ lon2
-				+ "&sensor=false&units=metric";
+	public ArrayList<GeoPoint> getDirections(final double lat1, final double lon1, final double lat2, final double lon2) {
+		String url = "http://maps.googleapis.com:80/maps/api/directions/xml?origin=" + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=metric";
 		String tag[] = { "lat", "lng" };
 		ArrayList<GeoPoint> list_of_geopoints = new ArrayList<GeoPoint>();
 		HttpResponse response = null;
@@ -127,8 +123,7 @@ public class MainActivity extends MapActivity implements OnClickListener {
 			HttpPost httpPost = new HttpPost(url);
 			response = httpClient.execute(httpPost, localContext);
 			InputStream in = response.getEntity().getContent();
-			DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder();
+			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = builder.parse(in);
 			if (doc != null) {
 				NodeList nl1, nl2;
@@ -141,8 +136,7 @@ public class MainActivity extends MapActivity implements OnClickListener {
 						Node node2 = nl2.item(i);
 						double lat = Double.parseDouble(node1.getTextContent());
 						double lng = Double.parseDouble(node2.getTextContent());
-						list_of_geopoints.add(new GeoPoint((int) (lat * 1E6),
-								(int) (lng * 1E6)));
+						list_of_geopoints.add(new GeoPoint((int) (lat * 1E6), (int) (lng * 1E6)));
 					}
 				} else {
 					// No points found
@@ -159,32 +153,52 @@ public class MainActivity extends MapActivity implements OnClickListener {
 	public void onClick(View v) {
 		int id = v.getId();
 		if (id == R.id.more) {
+			if (showPopupMenu == true) {
+				showPopupMenu = false;
+				mPopupMenu.setVisibility(View.GONE);
+			} else {
+				showPopupMenu = true;
+				mPopupMenu.setVisibility(View.VISIBLE);
+			}
 
 		}
 
 	}
 
+	@Override
+	public void onBackPressed() {
+		if (showPopupMenu == true) {
+			showPopupMenu = false;
+			mPopupMenu.setVisibility(View.GONE);
+			return;
+		}
+		super.onBackPressed();
+	}
+
 	public void refreshListAdapter() {
 		items = new ArrayList<MoreMenuItem>();
 
-		// create items, when add new item, you must change height of list with 1 item = 45dp + 1dp border
-		items.add(new MoreMenuItem("Clear Map", false));
-		items.add(new MoreMenuItem("Settings", true));
-		items.add(new MoreMenuItem("Help", true));
+		// create items, when add new item, you must change height of list with
+		// 1 item = 45dp + 1dp border
+		Resources res = getResources();
+		items.add(new MoreMenuItem(res.getString(R.string.clear_map), false));
+		items.add(new MoreMenuItem(res.getString(R.string.settings), true));
+		items.add(new MoreMenuItem(res.getString(R.string.help), true));
+
+		mPopupMenu.setAdapter(new MoreListAdapter(this, items));
+		mPopupMenu.setOnItemClickListener(this);
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		if (position == 1){
+			startActivity(new Intent(this, SettingActivity.class));
+		}
 		
-		mListView.setAdapter(new MoreListAdapter(this, items));
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-
-				MoreMenuItem item = items.get(position);
-				Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
-
-			}
-		});
-		
+		showPopupMenu = false;
+		mPopupMenu.setVisibility(View.GONE);
+			
 	}
 
 }

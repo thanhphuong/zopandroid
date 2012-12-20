@@ -1,4 +1,4 @@
-package vn.fiosoft.settings;
+package vn.fiosoft.setting;
 
 import java.util.List;
 import vn.fiosoft.zop.R;
@@ -16,7 +16,7 @@ public class SettingAdapter extends ArrayAdapter<SettingItem> {
 	private Activity mActivity;
 		
 	public SettingAdapter(Activity activity, List<SettingItem> items){
-		super(activity, R.layout.settings_list_item, items);
+		super(activity, R.layout.item_settings_list, items);
 		this.mItems = items;
 		this.mActivity = activity;
 	}
@@ -34,7 +34,7 @@ public class SettingAdapter extends ArrayAdapter<SettingItem> {
 		if (rowView == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) mActivity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			rowView = layoutInflater.inflate(R.layout.settings_list_item, parent,
+			rowView = layoutInflater.inflate(R.layout.item_settings_list, parent,
 					false);
 			viewHolder = new ViewHolder();
 			viewHolder.text = (TextView) rowView.findViewById(R.id.text);

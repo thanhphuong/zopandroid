@@ -15,6 +15,10 @@
     <string name="manage_accounts">Manage Accounts</string>
     <string name="labs">Labs</string>
     <string name="about">About</string>
+    <string name="add_account">Add account</string>
+    <string name="sync_error">Sync error</string>
+    <string name="sync_on">Sync on</string>
+    <string name="sync_off">Sync off</string>
     
 
 </resources>

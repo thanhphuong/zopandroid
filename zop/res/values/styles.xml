@@ -3,7 +3,8 @@
     <style name="AppTheme" parent="android:Theme.Light" />
 
     <style name="LargeTitleTheme" parent="android:Theme">
-        <item name="android:windowTitleSize">45dip</item>             
+        <item name="android:windowTitleSize">45dip</item>     
+        <item name="android:textSize">9pt</item>		
     </style>
 
 </resources>

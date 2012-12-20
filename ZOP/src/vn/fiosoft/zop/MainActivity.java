@@ -18,7 +18,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import vn.fiosoft.settings.SettingActivity;
+import vn.fiosoft.setting.SettingActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;

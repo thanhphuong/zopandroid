@@ -21,7 +21,7 @@ public class MoreListAdapter extends ArrayAdapter<MoreMenuItem> {
 	}
 
 	public MoreListAdapter(Activity activity, List<MoreMenuItem> items) {
-		super(activity, R.layout.more_list_item, items);
+		super(activity, R.layout.item_more_list, items);
 		this.mActivity = activity;
 		this.mItems = items;
 	}
@@ -35,7 +35,7 @@ public class MoreListAdapter extends ArrayAdapter<MoreMenuItem> {
 		if (rowView == null) {
 			LayoutInflater layoutInflater = (LayoutInflater) mActivity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			rowView = layoutInflater.inflate(R.layout.more_list_item, parent,
+			rowView = layoutInflater.inflate(R.layout.item_more_list, parent,
 					false);
 			viewHolder = new ViewHolder();
 			viewHolder.text = (TextView) rowView.findViewById(R.id.more_item);

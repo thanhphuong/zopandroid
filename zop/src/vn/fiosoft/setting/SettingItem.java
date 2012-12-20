@@ -1,4 +1,4 @@
-package vn.fiosoft.settings;
+package vn.fiosoft.setting;
 
 public class SettingItem {
 

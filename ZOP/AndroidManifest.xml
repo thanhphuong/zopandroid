@@ -12,7 +12,9 @@
         android:label="@string/app_name" >
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="vn.fiosoft.settings.SettingActivity"
+            android:name="vn.fiosoft.setting.SettingActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/settings"
-            android:theme="@style/LargeTitleTheme"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
 
         <uses-library android:name="com.google.android.maps" />
     </application>

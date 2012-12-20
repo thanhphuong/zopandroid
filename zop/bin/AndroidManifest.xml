@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="vn.fiosoft.settings.SettingActivity"
+            android:name="vn.fiosoft.setting.SettingActivity"
             android:label="@string/settings"
             android:theme="@style/LargeTitleTheme"/>
 

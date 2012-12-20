@@ -1,4 +1,4 @@
-package vn.fiosoft.settings;
+package vn.fiosoft.setting;
 
 import java.util.ArrayList;
 import java.util.List;

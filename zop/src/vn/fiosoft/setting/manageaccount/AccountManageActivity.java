@@ -34,7 +34,7 @@ public class AccountManageActivity extends ListActivity {
 
 		// create items, when add new item, you must change height of list with
 		// 1 item = 45dp + 1dp border
-		items.add(new Account(1, "btphuong2345@gmail.com", Account.SYNC_ERROR));
+		items.add(new Account(1, "btphuong2345@gmail.comsdfasdfasdfsadfsafdsdfasfsafsd", Account.SYNC_ERROR));
 		items.add(new Account(2, "btphuong2345@gmail.com", Account.SYNC_ON));
 		items.add(new Account(3, "btphuong2345@gmail.com", Account.SYNC_OFF));
 

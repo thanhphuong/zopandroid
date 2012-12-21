@@ -2,16 +2,20 @@ package vn.fiosoft.setting;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import vn.fiosoft.setting.manageaccount.AccountManageActivity;
 import vn.fiosoft.zop.R;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SettingActivity extends ListActivity{
+public class SettingActivity extends ListActivity implements OnItemClickListener {
 
 	private ListView mListView;
 	private List<SettingItem> items;
@@ -22,11 +26,9 @@ public class SettingActivity extends ListActivity{
 
 		setContentView(R.layout.activity_settings);
 
-		mListView = getListView();	
+		mListView = getListView();
 		refreshListAdapter();
 	}
-
-	
 
 	public void refreshListAdapter() {
 		items = new ArrayList<SettingItem>();
@@ -39,17 +41,15 @@ public class SettingActivity extends ListActivity{
 		items.add(new SettingItem(res.getString(R.string.about), ""));
 
 		mListView.setAdapter(new SettingAdapter(this, items));
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		mListView.setOnItemClickListener(this);
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	}
 
-				SettingItem item = items.get(position);
-				Toast.makeText(SettingActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
-
-			}
-		});
-
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		if (position == 0) {
+			startActivity(new Intent(this, AccountManageActivity.class));
+		}
 	}
 
 }

@@ -6,6 +6,7 @@
     <uses-sdk android:minSdkVersion="8" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -26,6 +27,12 @@
             android:name="vn.fiosoft.setting.SettingActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
+        <activity
+            android:name="vn.fiosoft.setting.manageaccount.AccountManageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/manage_accounts"
             android:screenOrientation="portrait"
             android:theme="@style/LargeTitleTheme" />
 

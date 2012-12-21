@@ -18,11 +18,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import vn.fiosoft.gps.GPSTracker;
+import vn.fiosoft.gps.MapItemizedOverlay;
 import vn.fiosoft.setting.SettingActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,15 +41,21 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 public class MainActivity extends MapActivity implements OnClickListener, OnItemClickListener {
 
 	private boolean showPopupMenu;
 
+	private MapView mapView;
+
 	private Button mGroupName;
 	private ImageButton mMoreButton;
 	private ListView mPopupMenu;
 	private List<MoreMenuItem> items;
+
+	private ImageButton mCurrentLocationButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,14 +66,14 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		mGroupName = (Button) findViewById(R.id.group_name);
 		mGroupName.setTypeface(tf);
 
-		MapView mapView = (MapView) findViewById(R.id.mapview);
+		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 
 		// List<Overlay> mapOverlays = mapView.getOverlays();
 		// Drawable drawable =
 		// this.getResources().getDrawable(R.drawable.androidmarker);
-		// HelloItemizedOverlay itemizedoverlay = new
-		// HelloItemizedOverlay(drawable, this);
+		// MapItemizedOverlay itemizedoverlay = new
+		// MapItemizedOverlay(drawable, this);
 		//
 		// GeoPoint point = new GeoPoint(19240000,-99120000);
 		// OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!",
@@ -85,13 +94,17 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		mapController.animateTo(moveTo);
 		mapController.setZoom(12);
 		mapView.getOverlays().add(new MyOverlay(all_geo_points));
-
-		JSONObject jsonObject = vn.fiosoft.zop.HttpClient1.SendHttpPost("https://twitter.com/statuses/user_timeline/vogella.json", new JSONObject());
+		//
+		// JSONObject jsonObject =
+		// vn.fiosoft.zop.HttpClient1.SendHttpPost("https://twitter.com/statuses/user_timeline/vogella.json",
+		// new JSONObject());
 
 		// begin
 		mMoreButton = (ImageButton) findViewById(R.id.more);
+		mCurrentLocationButton = (ImageButton) findViewById(R.id.current_location);
 
 		mMoreButton.setOnClickListener(this);
+		mCurrentLocationButton.setOnClickListener(this);
 
 		mPopupMenu = (ListView) findViewById(R.id.more_list);
 
@@ -163,6 +176,40 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 		}
 
+		if (id == R.id.current_location) {
+			// create class object
+			GPSTracker gps = new GPSTracker(MainActivity.this);
+
+			// check if GPS enabled
+			if (gps.canGetLocation()) {
+
+				int latitude = (int) (gps.getLatitude() * 1000000);
+				int longitude = (int) (gps.getLongitude() * 1000000);
+
+				// \n is for new line
+				Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+
+				List<Overlay> mapOverlays = mapView.getOverlays();
+				mapOverlays.clear();
+				Drawable drawable = this.getResources().getDrawable(R.drawable.location_map);
+				MapItemizedOverlay itemizedoverlay = new MapItemizedOverlay(drawable, this);
+
+				GeoPoint point = new GeoPoint(latitude, longitude);
+				OverlayItem overlayitem = new OverlayItem(point, "Hi", "Current Location!");
+
+				MapController mapController = mapView.getController();
+				mapController.animateTo(point);
+				itemizedoverlay.addOverlay(overlayitem);
+				mapOverlays.add(itemizedoverlay);
+
+			} else {
+				// can't get location
+				// GPS or Network is not enabled
+				// Ask user to enable GPS/network in settings
+				gps.showSettingsAlert();
+			}
+		}
+
 	}
 
 	@Override
@@ -192,13 +239,13 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		if (position == 1){
+		if (position == 1) {
 			startActivity(new Intent(this, SettingActivity.class));
 		}
-		
+
 		showPopupMenu = false;
 		mPopupMenu.setVisibility(View.GONE);
-			
+
 	}
 
 }

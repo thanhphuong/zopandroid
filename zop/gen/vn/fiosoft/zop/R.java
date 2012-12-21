@@ -14,33 +14,37 @@ public final class R {
         public static final int action_search=0x7f020000;
         public static final int black_half_alpha=0x7f020001;
         public static final int blue_half_alpha=0x7f020002;
-        public static final int ic_action_overflow=0x7f020003;
-        public static final int ic_action_refresh=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int location_directions=0x7f020006;
-        public static final int location_map=0x7f020007;
-        public static final int location_place=0x7f020008;
-        public static final int map_button_bg=0x7f020009;
-        public static final int navigation_next_item=0x7f02000a;
+        public static final int device_access_location_found=0x7f020003;
+        public static final int ic_action_overflow=0x7f020004;
+        public static final int ic_action_refresh=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int location_directions=0x7f020007;
+        public static final int location_map=0x7f020008;
+        public static final int location_place=0x7f020009;
+        public static final int map_button_bg=0x7f02000a;
+        public static final int navigation_next_item=0x7f02000b;
+        public static final int white_button_bg=0x7f02000c;
+        public static final int white_half_alpha=0x7f02000d;
     }
     public static final class id {
         public static final int add_account=0x7f070000;
-        public static final int directions=0x7f070008;
+        public static final int current_location=0x7f070006;
+        public static final int directions=0x7f070009;
         public static final int group_name=0x7f070005;
-        public static final int icon_sync=0x7f07000e;
-        public static final int label=0x7f070010;
-        public static final int layers=0x7f07000a;
+        public static final int icon_sync=0x7f07000f;
+        public static final int label=0x7f070011;
+        public static final int layers=0x7f07000b;
         public static final int loign=0x7f070003;
         public static final int mapview=0x7f070004;
-        public static final int menu_settings=0x7f070011;
-        public static final int more=0x7f07000b;
-        public static final int more_item=0x7f07000f;
-        public static final int more_list=0x7f070006;
+        public static final int menu_settings=0x7f070012;
+        public static final int more=0x7f07000c;
+        public static final int more_item=0x7f070010;
+        public static final int more_list=0x7f070007;
         public static final int password=0x7f070002;
-        public static final int places=0x7f070009;
-        public static final int search=0x7f070007;
-        public static final int status_sync=0x7f07000d;
-        public static final int text=0x7f07000c;
+        public static final int places=0x7f07000a;
+        public static final int search=0x7f070008;
+        public static final int status_sync=0x7f07000e;
+        public static final int text=0x7f07000d;
         public static final int youraccount=0x7f070001;
     }
     public static final class layout {

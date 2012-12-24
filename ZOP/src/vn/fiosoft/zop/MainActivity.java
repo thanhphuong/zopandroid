@@ -18,14 +18,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import vn.fiosoft.gps.CustomItemizedOverlay;
+import vn.fiosoft.gps.CustomOverlayItem;
 import vn.fiosoft.gps.GPSTracker;
-import vn.fiosoft.gps.MapItemizedOverlay;
 import vn.fiosoft.setting.SettingActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,6 +51,9 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 	private boolean showPopupMenu;
 
 	private MapView mapView;
+	private List<Overlay> mapOverlays;
+	private Drawable drawable;
+	private CustomItemizedOverlay<CustomOverlayItem> itemizedOverlay;
 
 	private Button mGroupName;
 	private ImageButton mMoreButton;
@@ -56,6 +61,8 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 	private List<MoreMenuItem> items;
 
 	private ImageButton mCurrentLocationButton;
+
+	private GPSTracker gps;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,13 +94,14 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		// itemizedoverlay.addOverlay(overlayitem2);
 		// mapOverlays.add(itemizedoverlay);
 
-		MapController mapController = mapView.getController();
-
-		ArrayList<GeoPoint> all_geo_points = getDirections(10.154929, 76.390316, 10.015861, 76.341867);
-		GeoPoint moveTo = all_geo_points.get(0);
-		mapController.animateTo(moveTo);
-		mapController.setZoom(12);
-		mapView.getOverlays().add(new MyOverlay(all_geo_points));
+		// MapController mapController = mapView.getController();
+		//
+		// ArrayList<GeoPoint> all_geo_points = getDirections(10.154929,
+		// 76.390316, 10.015861, 76.341867);
+		// GeoPoint moveTo = all_geo_points.get(0);
+		// mapController.animateTo(moveTo);
+		// mapController.setZoom(12);
+		// mapView.getOverlays().add(new MyOverlay(all_geo_points));
 		//
 		// JSONObject jsonObject =
 		// vn.fiosoft.zop.HttpClient1.SendHttpPost("https://twitter.com/statuses/user_timeline/vogella.json",
@@ -110,6 +118,35 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 		mPopupMenu.setVisibility(View.GONE);
 		showPopupMenu = false;
+
+		// map view
+		mapOverlays = mapView.getOverlays();
+		drawable = getResources().getDrawable(R.drawable.marker);
+
+		// get current position
+		gps = new GPSTracker(MainActivity.this);
+
+		// check if GPS enabled
+		if (gps.canGetLocation()) {
+
+			itemizedOverlay = new CustomItemizedOverlay<CustomOverlayItem>(drawable, mapView);
+
+			GeoPoint point = new GeoPoint((int) (gps.getLatitude() * 1E6), (int) (gps.getLongitude() * 1E6));
+			CustomOverlayItem overlayItem = new CustomOverlayItem(point, "Tomorrow Never Dies (1997)", "(M gives Bond his mission in Daimler car)", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
+			itemizedOverlay.addOverlay(overlayItem);
+
+			mapOverlays.add(itemizedOverlay);
+
+			final MapController mc = mapView.getController();
+			mc.animateTo(point);
+			mc.setZoom(16);
+
+		} else {
+			// can't get location
+			// GPS or Network is not enabled
+			// Ask user to enable GPS/network in settings
+			gps.showSettingsAlert();
+		}
 
 	}
 
@@ -178,7 +215,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 		if (id == R.id.current_location) {
 			// create class object
-			GPSTracker gps = new GPSTracker(MainActivity.this);
+			gps = new GPSTracker(MainActivity.this);
 
 			// check if GPS enabled
 			if (gps.canGetLocation()) {
@@ -245,6 +282,24 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 		showPopupMenu = false;
 		mPopupMenu.setVisibility(View.GONE);
+
+	}
+
+	public void updateLocation(Location location) {
+		
+		mapOverlays.clear();
+		
+		itemizedOverlay = new CustomItemizedOverlay<CustomOverlayItem>(drawable, mapView);
+
+		GeoPoint point = new GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6));
+		CustomOverlayItem overlayItem = new CustomOverlayItem(point, "Tomorrow Never Dies (1997)", "(M gives Bond his mission in Daimler car)", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
+		itemizedOverlay.addOverlay(overlayItem);
+
+		mapOverlays.add(itemizedOverlay);
+
+		final MapController mc = mapView.getController();
+		mc.animateTo(point);
+		mc.setZoom(16);
 
 	}
 

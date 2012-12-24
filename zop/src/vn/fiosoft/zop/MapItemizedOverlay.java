@@ -1,4 +1,4 @@
-package vn.fiosoft.gps;
+package vn.fiosoft.zop;
 
 import java.util.ArrayList;
 
@@ -55,5 +55,5 @@ public class MapItemizedOverlay extends ItemizedOverlay<OverlayItem>
       dialog.show();
       return true;
     }
-
+ 
 }

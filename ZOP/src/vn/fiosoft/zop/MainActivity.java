@@ -13,23 +13,19 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import vn.fiosoft.gps.CustomItemizedOverlay;
 import vn.fiosoft.gps.CustomOverlayItem;
 import vn.fiosoft.gps.GPSTracker;
 import vn.fiosoft.setting.SettingActivity;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -132,7 +128,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 			itemizedOverlay = new CustomItemizedOverlay<CustomOverlayItem>(drawable, mapView);
 
 			GeoPoint point = new GeoPoint((int) (gps.getLatitude() * 1E6), (int) (gps.getLongitude() * 1E6));
-			CustomOverlayItem overlayItem = new CustomOverlayItem(point, "Tomorrow Never Dies (1997)", "(M gives Bond his mission in Daimler car)", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
+			CustomOverlayItem overlayItem = new CustomOverlayItem(point, "28/12/2012", "Bùi Thanh Phương Bùi Thanh Phương", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
 			itemizedOverlay.addOverlay(overlayItem);
 
 			mapOverlays.add(itemizedOverlay);
@@ -277,7 +273,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		if (position == 1) {
-			startActivity(new Intent(this, SettingActivity.class));
+			startActivity(new Intent(this, SettingActivity.class));			
 		}
 
 		showPopupMenu = false;

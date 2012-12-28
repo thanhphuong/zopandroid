@@ -35,6 +35,12 @@
             android:label="@string/manage_accounts"
             android:screenOrientation="portrait"
             android:theme="@style/LargeTitleTheme" />
+        <activity
+            android:name="vn.fiosoft.gps.DetailLocationActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/manage_accounts"
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
 
         <uses-library android:name="com.google.android.maps" />
     </application>

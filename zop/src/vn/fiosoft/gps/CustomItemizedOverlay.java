@@ -17,12 +17,15 @@ package vn.fiosoft.gps;
 
 import java.util.ArrayList;
 
+import vn.fiosoft.setting.SettingActivity;
 import vn.fiosoft.zop.library.mapviewballoons.BalloonOverlayView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
@@ -54,8 +57,12 @@ public class CustomItemizedOverlay<Item extends OverlayItem> extends vn.fiosoft.
 
 	@Override
 	protected boolean onBalloonTap(int index, CustomOverlayItem item) {
-		Toast.makeText(c, "onBalloonTap for overlay index " + index,
-				Toast.LENGTH_LONG).show();
+		GeoPoint point = item.getPoint();
+		Intent intent = new Intent(c, DetailLocationActivity.class);
+		intent.putExtra("latitude", point.getLatitudeE6()/1E6);
+		intent.putExtra("longitude", point.getLongitudeE6()/1E6);
+		c.startActivity(intent);
+		
 		return true;
 	}
 

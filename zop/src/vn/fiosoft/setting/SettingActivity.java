@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class SettingActivity extends ListActivity implements OnItemClickListener {
 
@@ -23,12 +22,11 @@ public class SettingActivity extends ListActivity implements OnItemClickListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_settings);
 
 		mListView = getListView();
 		refreshListAdapter();
-	}
+	}	
 
 	public void refreshListAdapter() {
 		items = new ArrayList<SettingItem>();

@@ -33,11 +33,11 @@
                     android:layout_height="45dp"
                     android:layout_weight="1"
                     android:background="@drawable/black_half_alpha"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:padding="5dp" >
 
-                    <Button
-                        android:id="@+id/group_name"
+                    <TextView
+                        android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -53,8 +53,24 @@
                     android:paddingRight="10dp"
                     android:paddingTop="10dp" >
 
+                    <LinearLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|left"                        
+                        android:paddingLeft="10dp" >
+
+                        <ImageButton
+                            android:id="@+id/my_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_button_bg"
+                            android:padding="5dp"
+                            android:src="@drawable/device_access_location_found" />
+                    </LinearLayout>
+
                     <ImageButton
-                        android:id="@+id/current_location"
+                        android:id="@+id/feature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/white_button_bg"
@@ -67,72 +83,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:gravity="right" >
+                android:gravity="center_vertical|right"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp" >
 
-                <ListView
-                    android:id="@+id/more_list"
-                    android:layout_width="200dp"
-                    android:layout_height="138dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@android:color/black" >
-                </ListView>
+                <ImageButton
+                    android:id="@+id/menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_button_bg"
+                    android:padding="5dp"
+                    android:src="@drawable/device_access_location_found" />
             </LinearLayout>
         </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/black_half_alpha"
-        android:gravity="center_vertical"
-        android:padding="5dp" >
-
-        <ImageButton
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/map_button_bg"
-            android:contentDescription="@string/search"
-            android:src="@drawable/action_search" />
-
-        <ImageButton
-            android:id="@+id/directions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/map_button_bg"
-            android:contentDescription="@string/directions"
-            android:src="@drawable/location_directions" />
-
-        <ImageButton
-            android:id="@+id/places"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/map_button_bg"
-            android:contentDescription="@string/places"
-            android:src="@drawable/location_place" />
-
-        <ImageButton
-            android:id="@+id/layers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/map_button_bg"
-            android:contentDescription="@string/layers"
-            android:src="@drawable/location_map" />
-
-        <ImageButton
-            android:id="@+id/more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/map_button_bg"
-            android:contentDescription="@string/more"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_action_overflow" />
     </LinearLayout>
 
 </LinearLayout>

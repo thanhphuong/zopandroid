@@ -2,5 +2,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
      <item android:state_pressed="true"
            android:drawable="@drawable/blue_half_alpha" /> <!-- pressed -->
-     <item android:drawable="@drawable/black_half_alpha" /> <!-- default -->
+     <item android:drawable="@android:color/transparent" /> <!-- default -->
  </selector>

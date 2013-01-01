@@ -21,10 +21,12 @@ import com.google.android.maps.OverlayItem;
 public class CustomOverlayItem extends OverlayItem {
 
 	protected String mImageURL;
+	private long time;
 	
-	public CustomOverlayItem(GeoPoint point, String title, String snippet, String imageURL) {
+	public CustomOverlayItem(long time, GeoPoint point, String title, String snippet, String imageURL) {
 		super(point, title, snippet);
-		mImageURL = imageURL;
+		this.mImageURL = imageURL;
+		this.time = time;
 	}
 
 	public String getImageURL() {
@@ -33,6 +35,14 @@ public class CustomOverlayItem extends OverlayItem {
 
 	public void setImageURL(String imageURL) {
 		this.mImageURL = imageURL;
+	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
 	}
 	
 }

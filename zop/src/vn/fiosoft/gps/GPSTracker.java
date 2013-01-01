@@ -29,6 +29,7 @@ public class GPSTracker extends Service implements LocationListener {
 	boolean canGetLocation = false;
 
 	Location location; // location
+	long time;
 	double latitude; // latitude
 	double longitude; // longitude
 
@@ -104,6 +105,15 @@ public class GPSTracker extends Service implements LocationListener {
 			locationManager.removeUpdates(GPSTracker.this);
 		}
 	}
+	
+	public long getTime(){
+		if (location != null) {
+			time = location.getTime();
+		}
+
+		// return latitude
+		return time;
+	}
 
 	/**
 	 * Function to get latitude
@@ -112,7 +122,7 @@ public class GPSTracker extends Service implements LocationListener {
 		if (location != null) {
 			latitude = location.getLatitude();
 		}
-
+		
 		// return latitude
 		return latitude;
 	}

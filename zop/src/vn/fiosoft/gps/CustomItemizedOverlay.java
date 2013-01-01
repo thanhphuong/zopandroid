@@ -17,6 +17,7 @@ package vn.fiosoft.gps;
 
 import java.util.ArrayList;
 
+import vn.fiosoft.http.HttpConnection;
 import vn.fiosoft.setting.SettingActivity;
 import vn.fiosoft.zop.library.mapviewballoons.BalloonOverlayView;
 
@@ -58,10 +59,15 @@ public class CustomItemizedOverlay<Item extends OverlayItem> extends vn.fiosoft.
 	@Override
 	protected boolean onBalloonTap(int index, CustomOverlayItem item) {
 		GeoPoint point = item.getPoint();
-		Intent intent = new Intent(c, DetailLocationActivity.class);
-		intent.putExtra("latitude", point.getLatitudeE6()/1E6);
-		intent.putExtra("longitude", point.getLongitudeE6()/1E6);
-		c.startActivity(intent);
+//		Intent intent = new Intent(c, DetailLocationActivity.class);
+//		intent.putExtra("latitude", point.getLatitudeE6()/1E6);
+//		intent.putExtra("longitude", point.getLongitudeE6()/1E6);
+//		c.startActivity(intent);
+		
+		HttpConnection connection = new HttpConnection();
+//		int result = connection.sendLocation(1001, item.getTime(), point.getLatitudeE6()/1E6, point.getLongitudeE6()/1E6);
+		int result = connection.login("btphuong2345@yahoo.com", "23041985");
+		Toast.makeText(c, String.valueOf(result), Toast.LENGTH_SHORT).show();
 		
 		return true;
 	}

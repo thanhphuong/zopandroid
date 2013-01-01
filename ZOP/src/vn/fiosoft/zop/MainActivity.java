@@ -128,7 +128,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 			itemizedOverlay = new CustomItemizedOverlay<CustomOverlayItem>(drawable, mapView);
 
 			GeoPoint point = new GeoPoint((int) (gps.getLatitude() * 1E6), (int) (gps.getLongitude() * 1E6));
-			CustomOverlayItem overlayItem = new CustomOverlayItem(point, "28/12/2012", "Bùi Thanh Phương Bùi Thanh Phương", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
+			CustomOverlayItem overlayItem = new CustomOverlayItem(gps.getTime(), point, "28/12/2012", "Bùi Thanh Phương", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
 			itemizedOverlay.addOverlay(overlayItem);
 
 			mapOverlays.add(itemizedOverlay);
@@ -288,7 +288,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		itemizedOverlay = new CustomItemizedOverlay<CustomOverlayItem>(drawable, mapView);
 
 		GeoPoint point = new GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6));
-		CustomOverlayItem overlayItem = new CustomOverlayItem(point, "Tomorrow Never Dies (1997)", "(M gives Bond his mission in Daimler car)", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
+		CustomOverlayItem overlayItem = new CustomOverlayItem(location.getTime(), point, "Tomorrow Never Dies (1997)", "(M gives Bond his mission in Daimler car)", "http://ia.media-imdb.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1._SX40_CR0,0,40,54_.jpg");
 		itemizedOverlay.addOverlay(overlayItem);
 
 		mapOverlays.add(itemizedOverlay);

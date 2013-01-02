@@ -66,8 +66,33 @@ public class AccountManage {
 	public List<Account> list() {
 		return accounts;
 	}
+	
+	public boolean addAccount(Account account){		
+		accounts.add(account);
+		return save();
+	}
+	
+	public void setAccountSync(Account account){		
+		boolean isExists = false;
+		String email = account.getEmail();
+		for (Account acc: accounts){
+			if(acc.getEmail().equalsIgnoreCase(email)){
+				account.setSync(Account.SYNC_ON);
+				isExists = true;
+			}else{
+				if (acc.getSync() == Account.SYNC_ON)
+					acc.setSync(Account.SYNC_OFF);
+			}
+		}
+		
+		if (isExists == false){
+			account.setSync(Account.SYNC_ON);
+			accounts.add(account);			
+		}
+		save();	
+	}
 
-	public boolean save() {
+	private boolean save() {
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream(FILE_NAME, true);

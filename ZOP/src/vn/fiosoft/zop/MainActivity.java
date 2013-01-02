@@ -53,6 +53,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 	private Button mGroupName;
 	private ImageButton mMoreButton;
+	private ImageButton mSettingsButton;
 	private ListView mPopupMenu;
 	private List<MoreMenuItem> items;
 
@@ -66,8 +67,8 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		setContentView(R.layout.activity_main);
 
 		Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7.ttf");
-		mGroupName = (Button) findViewById(R.id.group_name);
-		mGroupName.setTypeface(tf);
+//		mGroupName = (Button) findViewById(R.id.name);
+//		mGroupName.setTypeface(tf);
 
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
@@ -103,17 +104,14 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		// vn.fiosoft.zop.HttpClient1.SendHttpPost("https://twitter.com/statuses/user_timeline/vogella.json",
 		// new JSONObject());
 
-		// begin
-		mMoreButton = (ImageButton) findViewById(R.id.more);
-		mCurrentLocationButton = (ImageButton) findViewById(R.id.current_location);
-
-		mMoreButton.setOnClickListener(this);
+		// begin		
+		mCurrentLocationButton = (ImageButton) findViewById(R.id.my_location);
+		mSettingsButton = (ImageButton) findViewById(R.id.settings);
+		
 		mCurrentLocationButton.setOnClickListener(this);
+		mSettingsButton.setOnClickListener(this);
 
-		mPopupMenu = (ListView) findViewById(R.id.more_list);
-
-		mPopupMenu.setVisibility(View.GONE);
-		showPopupMenu = false;
+		
 
 		// map view
 		mapOverlays = mapView.getOverlays();
@@ -135,7 +133,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 			final MapController mc = mapView.getController();
 			mc.animateTo(point);
-			mc.setZoom(16);
+			mc.setZoom(4);
 
 		} else {
 			// can't get location
@@ -148,9 +146,7 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 	@Override
 	protected void onResume() {
-		super.onResume();
-
-		refreshListAdapter();
+		super.onResume();		
 	}
 
 	@Override
@@ -198,18 +194,12 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		if (id == R.id.more) {
-			if (showPopupMenu == true) {
-				showPopupMenu = false;
-				mPopupMenu.setVisibility(View.GONE);
-			} else {
-				showPopupMenu = true;
-				mPopupMenu.setVisibility(View.VISIBLE);
-			}
 
+		if (id == R.id.settings){
+			startActivity(new Intent(this, SettingActivity.class));
 		}
-
-		if (id == R.id.current_location) {
+		
+		if (id == R.id.my_location) {
 			// create class object
 			gps = new GPSTracker(MainActivity.this);
 

@@ -3,7 +3,7 @@ package vn.fiosoft.setting;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.fiosoft.setting.manageaccount.AccountManageActivity;
+import vn.fiosoft.setting.accountmanage.AccountManageActivity;
 import vn.fiosoft.zop.R;
 import android.app.ListActivity;
 import android.content.Intent;

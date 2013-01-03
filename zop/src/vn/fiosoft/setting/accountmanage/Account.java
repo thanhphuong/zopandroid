@@ -1,4 +1,4 @@
-package vn.fiosoft.setting.manageaccount;
+package vn.fiosoft.setting.accountmanage;
 
 public class Account {
 	

@@ -1,23 +1,23 @@
-package vn.fiosoft.setting.manageaccount;
+package vn.fiosoft.setting.accountmanage;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.parsers.ParserConfigurationException;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xmlpull.v1.XmlSerializer;
+
 import vn.fiosoft.log.Log4J;
-import android.util.Log;
+import android.content.Context;
 import android.util.Xml;
 
 public class AccountManage {
@@ -31,8 +31,10 @@ public class AccountManage {
 	private final String SYNC = "sync";
 
 	private List<Account> accounts;
+	private Context context;
 
-	public AccountManage() {
+	public AccountManage(Context context) {
+		this.context = context;
 		parseXML();
 	}
 
@@ -48,16 +50,12 @@ public class AccountManage {
 			AccountHandler accountHandler = new AccountHandler();
 			xr.setContentHandler(accountHandler);
 
-			xr.parse(new InputSource(new FileInputStream(FILE_NAME)));
+			xr.parse(new InputSource(context.openFileInput(FILE_NAME)));
 
 			accounts = accountHandler.getListAccount();
 
-		} catch (ParserConfigurationException pce) {
-			Log.e("SAX XML", "sax parse error", pce);
-		} catch (SAXException se) {
-			Log.e("SAX XML", "sax error", se);
-		} catch (IOException ioe) {
-			Log.e("SAX XML", "sax parse io error", ioe);
+		} catch (Exception ioe) {
+			Log4J.e("parse", ioe.toString());
 		}
 
 		return accounts;
@@ -66,36 +64,40 @@ public class AccountManage {
 	public List<Account> list() {
 		return accounts;
 	}
-	
-	public boolean addAccount(Account account){		
-		accounts.add(account);
-		return save();
+
+	public Account getAccountSync() {
+		for (Account acc : accounts) {
+			if (acc.getSync() == Account.SYNC_ON)
+				return acc;
+
+		}
+		return null;
 	}
-	
-	public void setAccountSync(Account account){		
+
+	public void setAccountSync(Account account) {
 		boolean isExists = false;
 		String email = account.getEmail();
-		for (Account acc: accounts){
-			if(acc.getEmail().equalsIgnoreCase(email)){
+		for (Account acc : accounts) {
+			if (acc.getEmail().equalsIgnoreCase(email)) {
 				account.setSync(Account.SYNC_ON);
 				isExists = true;
-			}else{
+			} else {
 				if (acc.getSync() == Account.SYNC_ON)
 					acc.setSync(Account.SYNC_OFF);
 			}
 		}
-		
-		if (isExists == false){
+
+		if (isExists == false) {
 			account.setSync(Account.SYNC_ON);
-			accounts.add(account);			
+			accounts.add(account);
 		}
-		save();	
+		save();
 	}
 
 	private boolean save() {
 		FileOutputStream fos;
 		try {
-			fos = new FileOutputStream(FILE_NAME, true);
+			fos = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
 			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
 
 			String s = writeXml();
@@ -131,7 +133,7 @@ public class AccountManage {
 				serializer.endTag("", SYNC);
 				serializer.endTag("", ACCOUNT);
 			}
-			serializer.endTag("", "ACCOUNTS");
+			serializer.endTag("", ACCOUNTS);
 			serializer.endDocument();
 			return writer.toString();
 		} catch (Exception e) {
@@ -150,6 +152,7 @@ public class AccountManage {
 		}
 
 		public AccountHandler() {
+			builder = new StringBuilder();
 			accounts = new ArrayList<Account>();
 		}
 
@@ -160,7 +163,7 @@ public class AccountManage {
 		@Override
 		public void characters(char[] ch, int start, int length) throws SAXException {
 			builder.append(ch, start, length);
-		}		
+		}
 
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -183,7 +186,7 @@ public class AccountManage {
 
 			builder.setLength(0);
 		}
-		
+
 	}
 
 }

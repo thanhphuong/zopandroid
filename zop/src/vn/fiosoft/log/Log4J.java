@@ -7,8 +7,8 @@ import android.util.Log;
 
 public class Log4J {
 	
-	public static Boolean mWriteToFile = false;
-	public static int mLevel = Log.INFO;	
+	public static Boolean mWriteToFile = true;
+	public static int mLevel = Log.ERROR;	
 	public static final String mFileName = "/sdcard/log.in";
 	
 	//log v

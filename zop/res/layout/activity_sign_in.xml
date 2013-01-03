@@ -23,7 +23,8 @@
                 android:id="@+id/email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="example@yahoo.com" />
+                android:hint="example@yahoo.com"
+                android:text="btphuong2345@yahoo.com" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,7 +42,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="password"
-                android:password="true" />
+                android:password="true"
+                android:text="23041985" />
         </LinearLayout>
 
         <LinearLayout

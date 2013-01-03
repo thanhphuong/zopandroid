@@ -98,6 +98,7 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int clear_map=0x7f060008;
         public static final int create_new_account=0x7f06000f;
+        public static final int current_location=0x7f060013;
         public static final int directions=0x7f060003;
         public static final int help=0x7f06000a;
         public static final int labs=0x7f06000c;

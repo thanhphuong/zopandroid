@@ -1,4 +1,4 @@
-package vn.fiosoft.setting.manageaccount;
+package vn.fiosoft.setting.accountmanage;
 
 import vn.fiosoft.http.HttpConnection;
 import vn.fiosoft.zop.R;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class SignInActivity extends Activity implements OnClickListener {
-
+	
 	private EditText mEmailEditText;
 	private EditText mPasswordEditText;
 	private Button mSignInButton;
@@ -41,6 +41,14 @@ public class SignInActivity extends Activity implements OnClickListener {
 			
 			HttpConnection connection = new HttpConnection();
 			int result = connection.login(email, password);
+			if (result > 0){
+				Account account  = new Account(result,email, Account.SYNC_ON);
+				AccountManage accountManage = new AccountManage(this);
+				accountManage.setAccountSync(account);
+				finish();
+				return;
+			}
+			
 			Toast.makeText(this, String.valueOf(result), Toast.LENGTH_SHORT).show();
 
 		}

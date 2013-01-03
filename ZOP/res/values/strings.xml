@@ -20,4 +20,6 @@
     <string name="sync_error">Sync error</string>
     <string name="sync_on">Sync on</string>
     <string name="sync_off">Sync off</string>
+    <string name="current_location">Current location</string>
+    
 </resources>

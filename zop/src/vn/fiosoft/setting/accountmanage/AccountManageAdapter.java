@@ -1,4 +1,4 @@
-package vn.fiosoft.setting.manageaccount;
+package vn.fiosoft.setting.accountmanage;
 
 import java.util.List;
 import vn.fiosoft.zop.R;

@@ -58,7 +58,7 @@
                             android:textColor="#FFF" />
 
                         <ImageButton
-                            android:id="@+id/feature"
+                            android:id="@+id/groups"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -117,7 +117,7 @@
                             android:src="@drawable/device_access_location_found" />
 
                         <ImageButton
-                            android:id="@+id/feature"
+                            android:id="@+id/features"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"

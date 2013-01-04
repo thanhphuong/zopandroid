@@ -48,7 +48,7 @@ public class AccountManageActivity extends ListActivity implements View.OnClickL
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-				Account item = items.get(position);
+				//Account item = items.get(position);
 				Toast.makeText(AccountManageActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
 
 			}

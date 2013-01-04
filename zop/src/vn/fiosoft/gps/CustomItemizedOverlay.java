@@ -18,11 +18,8 @@ package vn.fiosoft.gps;
 import java.util.ArrayList;
 
 import vn.fiosoft.http.HttpConnection;
-import vn.fiosoft.setting.SettingActivity;
 import vn.fiosoft.zop.library.mapviewballoons.BalloonOverlayView;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
@@ -45,10 +42,18 @@ public class CustomItemizedOverlay<Item extends OverlayItem> extends vn.fiosoft.
 	    m_overlays.add(overlay);
 	    populate();
 	}
-
+	
 	@Override
 	protected CustomOverlayItem createItem(int i) {
 		return m_overlays.get(i);
+	}	
+	
+	@Override
+	public boolean onTap(GeoPoint p, MapView mapView) {
+		
+		Toast.makeText(c, "lat : " + p.getLatitudeE6(), Toast.LENGTH_SHORT).show();
+		
+		return super.onTap(p, mapView);
 	}
 
 	@Override
@@ -58,7 +63,7 @@ public class CustomItemizedOverlay<Item extends OverlayItem> extends vn.fiosoft.
 
 	@Override
 	protected boolean onBalloonTap(int index, CustomOverlayItem item) {
-		GeoPoint point = item.getPoint();
+		//GeoPoint point = item.getPoint();
 //		Intent intent = new Intent(c, DetailLocationActivity.class);
 //		intent.putExtra("latitude", point.getLatitudeE6()/1E6);
 //		intent.putExtra("longitude", point.getLongitudeE6()/1E6);

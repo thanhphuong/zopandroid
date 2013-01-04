@@ -3,6 +3,7 @@ package vn.fiosoft.zop;
 import java.util.List;
 
 import vn.fiosoft.common.Util;
+import vn.fiosoft.feature.FeatureActivity;
 import vn.fiosoft.gps.CustomItemizedOverlay;
 import vn.fiosoft.gps.CustomOverlayItem;
 import vn.fiosoft.gps.GPSTracker;
@@ -22,17 +23,19 @@ import com.google.android.maps.Overlay;
 
 public class MainActivity extends MapActivity implements OnClickListener {
 
-	private final int ZOOM_DEFAULT = 12;
+	private final int ZOOM_DEFAULT = 18;
 	private final String DATE_FORMAT = "MM-dd-yyyy HH:mm:ss";
 
 	private MapView mapView;
 	private List<Overlay> mapOverlays;
 	private Drawable drawable;
 	private CustomItemizedOverlay<CustomOverlayItem> itemizedOverlay;
-	private ImageButton mSettingsButton;
-	private ImageButton mCurrentLocationButton;
 	private GPSTracker mGPS;
 	private Util mUtil;
+
+	private ImageButton mSettingsButton;
+	private ImageButton mCurrentLocationButton;
+	private ImageButton mFeaturesButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,9 +47,11 @@ public class MainActivity extends MapActivity implements OnClickListener {
 		mapView = (MapView) findViewById(R.id.mapview);
 		mCurrentLocationButton = (ImageButton) findViewById(R.id.my_location);
 		mSettingsButton = (ImageButton) findViewById(R.id.settings);
-
+		mFeaturesButton = (ImageButton) findViewById(R.id.features);
+		
 		mCurrentLocationButton.setOnClickListener(this);
 		mSettingsButton.setOnClickListener(this);
+		mFeaturesButton.setOnClickListener(this);
 
 		mapView.setBuiltInZoomControls(true);
 
@@ -112,13 +117,17 @@ public class MainActivity extends MapActivity implements OnClickListener {
 	public void onClick(View v) {
 		int id = v.getId();
 
-		if (id == R.id.settings) {
-			startActivity(new Intent(this, SettingActivity.class));
-		}
-
 		if (id == R.id.my_location) {
 			mapOverlays.clear();
 			showMyLocation(mapView.getZoomLevel());
+		}
+
+		if (id == R.id.features) {
+			startActivity(new Intent(this, FeatureActivity.class));
+		}
+		
+		if (id == R.id.settings) {
+			startActivity(new Intent(this, SettingActivity.class));
 		}
 
 	}

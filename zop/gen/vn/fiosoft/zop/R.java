@@ -48,47 +48,51 @@ public final class R {
     }
     public static final class id {
         public static final int balloon_close=0x7f050001;
-        public static final int balloon_disclosure=0x7f050014;
+        public static final int balloon_disclosure=0x7f050015;
         public static final int balloon_inner_layout=0x7f050000;
-        public static final int balloon_item_image=0x7f050015;
-        public static final int balloon_item_snippet=0x7f050013;
-        public static final int balloon_item_title=0x7f050012;
-        public static final int balloon_main_layout=0x7f050011;
+        public static final int balloon_item_image=0x7f050016;
+        public static final int balloon_item_snippet=0x7f050014;
+        public static final int balloon_item_title=0x7f050013;
+        public static final int balloon_main_layout=0x7f050012;
         public static final int create_new_account=0x7f050003;
-        public static final int email=0x7f050010;
-        public static final int feature=0x7f05000d;
+        public static final int email=0x7f050011;
+        public static final int features=0x7f05000f;
         public static final int friends=0x7f05000b;
-        public static final int icon_sync=0x7f050018;
-        public static final int label=0x7f05001a;
+        public static final int groups=0x7f05000d;
+        public static final int icon_sync=0x7f050019;
+        public static final int image=0x7f05001a;
+        public static final int label=0x7f05001c;
         public static final int latitude=0x7f050004;
         public static final int loign=0x7f050009;
         public static final int longitude=0x7f050005;
         public static final int mapview=0x7f05000a;
-        public static final int menu_settings=0x7f05001b;
-        public static final int more_item=0x7f050019;
+        public static final int menu_settings=0x7f05001d;
+        public static final int more_item=0x7f05001b;
         public static final int my_location=0x7f05000e;
         public static final int name=0x7f05000c;
         public static final int password=0x7f050008;
-        public static final int settings=0x7f05000f;
+        public static final int settings=0x7f050010;
         public static final int share_location=0x7f050006;
         public static final int sign_in=0x7f050002;
-        public static final int status_sync=0x7f050017;
-        public static final int text=0x7f050016;
+        public static final int status_sync=0x7f050018;
+        public static final int text=0x7f050017;
         public static final int youraccount=0x7f050007;
     }
     public static final class layout {
         public static final int activity_account_manage=0x7f030000;
         public static final int activity_detail_location=0x7f030001;
         public static final int activity_direction=0x7f030002;
-        public static final int activity_login=0x7f030003;
-        public static final int activity_main=0x7f030004;
-        public static final int activity_settings=0x7f030005;
-        public static final int activity_sign_in=0x7f030006;
-        public static final int balloon_overlay=0x7f030007;
-        public static final int balloon_overlay_example2=0x7f030008;
-        public static final int item_account_manage_list=0x7f030009;
-        public static final int item_more_list=0x7f03000a;
-        public static final int item_settings_list=0x7f03000b;
+        public static final int activity_features=0x7f030003;
+        public static final int activity_login=0x7f030004;
+        public static final int activity_main=0x7f030005;
+        public static final int activity_settings=0x7f030006;
+        public static final int activity_sign_in=0x7f030007;
+        public static final int balloon_overlay=0x7f030008;
+        public static final int balloon_overlay_example2=0x7f030009;
+        public static final int item_account_manage_list=0x7f03000a;
+        public static final int item_feature_list=0x7f03000b;
+        public static final int item_more_list=0x7f03000c;
+        public static final int item_setting_list=0x7f03000d;
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
@@ -100,6 +104,7 @@ public final class R {
         public static final int create_new_account=0x7f06000f;
         public static final int current_location=0x7f060013;
         public static final int directions=0x7f060003;
+        public static final int features=0x7f060014;
         public static final int help=0x7f06000a;
         public static final int labs=0x7f06000c;
         public static final int layers=0x7f060005;

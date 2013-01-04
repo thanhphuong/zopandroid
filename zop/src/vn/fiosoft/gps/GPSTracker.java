@@ -139,8 +139,12 @@ public class GPSTracker extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		this.location = location;	
-		((MainActivity) mContext).updateLocation(location);
+		if (this.location.distanceTo(location) >= MIN_DISTANCE_CHANGE_FOR_UPDATES){
+			this.location = location;
+			((MainActivity) mContext).updateLocation(location);
+		}
+			
+		
 	}
 
 	@Override

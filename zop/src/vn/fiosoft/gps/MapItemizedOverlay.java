@@ -1,9 +1,13 @@
-package vn.fiosoft.zop;
+package vn.fiosoft.gps;
 
 import java.util.ArrayList;
 
+import vn.fiosoft.http.HttpConnection;
+import vn.fiosoft.zop.R;
+
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
@@ -48,12 +52,18 @@ public class MapItemizedOverlay extends ItemizedOverlay<OverlayItem>
     
     @Override
     protected boolean onTap(int index) {
-      OverlayItem item = mOverlays.get(index);
-      AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-      dialog.setTitle(item.getTitle());
-      dialog.setMessage(item.getSnippet());
-      dialog.show();
+      final OverlayItem item = mOverlays.get(index);
+      AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);		
+		dialog.setItems(R.array.share, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int position) {
+				HttpConnection connection = new HttpConnection();
+				//int result = connection.sendLocation(1001, item .getTime(), point.getLatitudeE6()/1E6, point.getLongitudeE6()/1E6);
+				
+			}
+		});
+		dialog.show();
       return true;
     }
+   
  
 }

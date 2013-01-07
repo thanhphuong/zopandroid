@@ -1,5 +1,6 @@
 package vn.fiosoft.setting.accountmanage;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
@@ -22,7 +23,7 @@ import android.util.Xml;
 
 public class AccountManage {
 
-	private String FILE_NAME = "acc.xml";
+	private String FILE_NAME = "ACC.XML";
 
 	private final String ACCOUNTS = "accounts";
 	private final String ACCOUNT = "account";
@@ -38,10 +39,12 @@ public class AccountManage {
 		parseXML();
 	}
 
+	@SuppressWarnings("finally")
 	private List<Account> parseXML() {
-		accounts = new ArrayList<Account>();
 
 		try {
+			accounts = new ArrayList<Account>();
+			FileInputStream fileInputStream = context.openFileInput(FILE_NAME);
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			SAXParser sp = spf.newSAXParser();
 
@@ -50,15 +53,16 @@ public class AccountManage {
 			AccountHandler accountHandler = new AccountHandler();
 			xr.setContentHandler(accountHandler);
 
-			xr.parse(new InputSource(context.openFileInput(FILE_NAME)));
+			xr.parse(new InputSource(fileInputStream));
 
 			accounts = accountHandler.getListAccount();
 
 		} catch (Exception ioe) {
 			Log4J.e("parse", ioe.toString());
+		} finally {
+			return accounts;
 		}
 
-		return accounts;
 	}
 
 	public List<Account> list() {

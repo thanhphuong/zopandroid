@@ -1,9 +1,11 @@
 package vn.fiosoft.gps;
 
+import vn.fiosoft.service.ZOPApplication;
+import vn.fiosoft.service.ZOPService;
 import vn.fiosoft.zop.MainActivity;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -16,7 +18,7 @@ import android.util.Log;
 
 public class GPSTracker extends Service implements LocationListener {
 
-	private final Context mContext;
+	private final MainActivity mContext;
 
 	// flag for GPS status
 	boolean isGPSEnabled = false;
@@ -38,8 +40,8 @@ public class GPSTracker extends Service implements LocationListener {
 	// Declaring a Location Manager
 	protected LocationManager locationManager;
 
-	public GPSTracker(Context context) {
-		this.mContext = context;
+	public GPSTracker(MainActivity context) {
+		this.mContext = context;		
 		startUsingGPS();
 	}
 
@@ -109,7 +111,7 @@ public class GPSTracker extends Service implements LocationListener {
 	 * Function to show settings alert dialog On pressing Settings button will
 	 * lauch Settings Options
 	 * */
-	public void showSettingsAlert() {
+	public void showSettingsAlert(final Activity  activity) {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
 		// Setting Dialog Title
@@ -130,6 +132,8 @@ public class GPSTracker extends Service implements LocationListener {
 		alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.cancel();
+				activity.finish();
+				ZOPApplication.mInstance.stopService(new Intent(activity, ZOPService.class));
 			}
 		});
 
@@ -139,9 +143,9 @@ public class GPSTracker extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		if (this.location.distanceTo(location) >= MIN_DISTANCE_CHANGE_FOR_UPDATES){
+		if (this.location == null || this.location.distanceTo(location) >= MIN_DISTANCE_CHANGE_FOR_UPDATES){
 			this.location = location;
-			((MainActivity) mContext).updateLocation(location);
+			mContext.updateLocation(location);
 		}
 			
 		
@@ -149,14 +153,17 @@ public class GPSTracker extends Service implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
+		
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
+		
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
+		
 	}
 
 	@Override

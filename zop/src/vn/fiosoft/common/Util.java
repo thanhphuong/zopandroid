@@ -17,21 +17,31 @@ import org.apache.http.protocol.HttpContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import com.google.android.maps.GeoPoint;
-
 import android.content.Context;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
-public class Util {	
+public class Util {
 	public Typeface getFont(Context context) {
 		return Typeface.createFromAsset(context.getAssets(), "fonts/digital-7.ttf");
 	}
-	
+
 	public String formatDateTime(long time, String format) {
 		Date date = new Date(time);
-		SimpleDateFormat formatter = new SimpleDateFormat(format); 
-		return formatter.format(date).toString();		
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		return formatter.format(date).toString();
+	}
+
+	public boolean checkNetwork(Context context) {
+		// check network
+		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo info = manager.getActiveNetworkInfo();
+
+		if (info == null || info.getState() != NetworkInfo.State.CONNECTED)
+			return false;
+		return true;
 	}
 
 	public ArrayList<GeoPoint> getDirections(final double lat1, final double lon1, final double lat2, final double lon2) {

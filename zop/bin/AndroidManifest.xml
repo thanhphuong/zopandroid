@@ -7,7 +7,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="vn.fiosoft.service.ZOPApplication"
@@ -49,15 +50,9 @@
             android:label="@string/sign_in"
             android:screenOrientation="portrait"
             android:theme="@style/LargeTitleTheme" />
-        <activity
-            android:name="vn.fiosoft.gps.DetailLocationActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="@string/manage_accounts"
-            android:screenOrientation="portrait"
-            android:theme="@style/LargeTitleTheme" />
         
-        
-        <service android:name="vn.fiosoft.service.ZOPService" />
+
+        <service android:name="vn.fiosoft.service.ZOPServicevice" />
 
         <uses-library android:name="com.google.android.maps" />
     </application>

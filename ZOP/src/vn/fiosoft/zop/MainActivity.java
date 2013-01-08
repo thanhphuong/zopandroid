@@ -2,20 +2,21 @@ package vn.fiosoft.zop;
 
 import java.util.List;
 
-import vn.fiosoft.common.Util;
 import vn.fiosoft.feature.FeatureActivity;
-import vn.fiosoft.gps.GPSTracker;
-import vn.fiosoft.gps.MapItemizedOverlay;
+import vn.fiosoft.http.HttpConnection;
 import vn.fiosoft.service.ZOPApplication;
 import vn.fiosoft.setting.SettingActivity;
+import vn.fiosoft.zop.gps.GPSTracker;
+import vn.fiosoft.zop.gps.MapItemizedOverlay;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import vn.fiosoft.common.Constants;
+import vn.fiosoft.common.Util;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -64,53 +65,51 @@ public class MainActivity extends MapActivity implements OnClickListener {
 
 	}
 
-	protected void showMyLocation(int zoom) {
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Location myLocation = getMyLocation();
+		showMyLocation(myLocation, true);
+	}
+
+	protected Location getMyLocation() {
+		mGPS = new GPSTracker(this);
 		// check if GPS enabled
 		if (mGPS.canGetLocation()) {
-
 			Location myLocation = mGPS.getLocation();
-
-			double lat = 0, lon = 0;
-			if (myLocation != null) {
-				lat = myLocation.getLatitude();
-				lon = myLocation.getLongitude();
-			}
-
-			mapOverlays.clear();
-			mapItemizedOverlay = new MapItemizedOverlay(drawable, this);
-
-			GeoPoint point = new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));
-			OverlayItem overlayItem = new OverlayItem(point, getResources().getString(R.string.current_location), "");
-			mapItemizedOverlay.addOverlay(overlayItem);
-
-			mapOverlays.add(mapItemizedOverlay);
-
-			MapController mapControl = mapView.getController();
-			mapControl.animateTo(point);
-			mapControl.setZoom(zoom);
+			return myLocation;
 
 		} else {
 			mGPS.showSettingsAlert(this);
 		}
+		return null;
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mGPS = new GPSTracker(this);
-		showMyLocation(mapView.getZoomLevel());
-	}
+	protected void showMyLocation(Location myLocation, boolean isSetCenter) {
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
+		if (myLocation == null)
+			return;
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (mGPS != null)
-			mGPS.stopUsingGPS();
+		double lat = 0, lon = 0;
+
+		lat = myLocation.getLatitude();
+		lon = myLocation.getLongitude();
+
+		mapOverlays.clear();
+		mapItemizedOverlay = new MapItemizedOverlay(drawable, this);
+
+		GeoPoint point = new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));
+		OverlayItem overlayItem = new OverlayItem(point, getResources().getString(R.string.current_location), "");
+		mapItemizedOverlay.addOverlay(overlayItem);
+
+		mapOverlays.add(mapItemizedOverlay);
+
+		MapController mapControl = mapView.getController();
+		mapControl.setZoom(mapView.getZoomLevel());
+		if (isSetCenter) {
+			mapControl.animateTo(point);
+		}
+
 	}
 
 	@Override
@@ -118,8 +117,8 @@ public class MainActivity extends MapActivity implements OnClickListener {
 		int id = v.getId();
 
 		if (id == R.id.my_location) {
-			mapOverlays.clear();
-			showMyLocation(mapView.getZoomLevel());
+			Location myLocation = mGPS.getLocation();
+			showMyLocation(myLocation, true);
 		}
 
 		if (id == R.id.features) {
@@ -133,7 +132,40 @@ public class MainActivity extends MapActivity implements OnClickListener {
 	}
 
 	public void updateLocation(Location location) {
-		showMyLocation(mapView.getZoomLevel());
+		showMyLocation(location, false);
+	}
+
+	public void shareLocation(int share) {
+		Util util = new Util();		
+		if (util.checkNetwork(this) == false) {
+			//not network
+			return;
+		}
+		switch (share) {
+		case Constants.SHARE_LOCATION_FRIEND:
+			break;
+		case Constants.SHARE_LOCATION_GROUP:
+			break;
+		default:
+			// send to server
+			Location location = mGPS.getLocation();
+			if (location != null) {
+				HttpConnection connection = new HttpConnection();
+				connection.sendLocation(1001, location.getTime(), location.getLatitude(), location.getLongitude());
+			}
+		}
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (mGPS != null)
+			mGPS.stopUsingGPS();
 	}
 
 }

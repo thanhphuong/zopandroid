@@ -1,7 +1,8 @@
 <resources>
 
-    <string name="app_name">zop</string>
+    <string name="app_name">Zop</string>
     <string name="title_activity_main">ZOP</string>
+    <string name="version_about">Version 0.1 beta \n Powered by FIOSOFT crew</string>
     
     <string name="search">search</string>    
     <string name="directions">directions</string>

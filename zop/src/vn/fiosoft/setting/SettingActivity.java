@@ -3,6 +3,8 @@ package vn.fiosoft.setting;
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.fiosoft.setting.accountmanage.Account;
+import vn.fiosoft.setting.accountmanage.AccountManage;
 import vn.fiosoft.setting.accountmanage.AccountManageActivity;
 import vn.fiosoft.zop.R;
 import android.app.ListActivity;
@@ -25,16 +27,29 @@ public class SettingActivity extends ListActivity implements OnItemClickListener
 		setContentView(R.layout.activity_settings);
 
 		mListView = getListView();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		refreshListAdapter();
-	}	
+	}
 
 	public void refreshListAdapter() {
+		AccountManage accountManage = new AccountManage(this);
+		Account account = accountManage.getAccountActivated();
+		String email = "";
+		if (account == null)
+			email = "no account";
+		else
+			email = account.getEmail();
+
 		items = new ArrayList<SettingItem>();
 
 		// create items, when add new item, you must change height of list with
 		// 1 item = 45dp + 1dp border
 		Resources res = getResources();
-		items.add(new SettingItem(res.getString(R.string.manage_accounts), "btphuong2345@gmail.com"));
+		items.add(new SettingItem(res.getString(R.string.manage_accounts), email));
 		items.add(new SettingItem(res.getString(R.string.labs), ""));
 		items.add(new SettingItem(res.getString(R.string.about), ""));
 
@@ -45,9 +60,18 @@ public class SettingActivity extends ListActivity implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		if (position == 0) {
+
+		switch (position) {
+		case 0:
 			startActivity(new Intent(this, AccountManageActivity.class));
+			break;
+		case 1:
+			break;
+		case 2:
+			startActivity(new Intent(this, AboutActivity.class));
+			break;
 		}
+
 	}
 
 }

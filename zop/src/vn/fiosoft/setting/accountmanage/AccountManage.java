@@ -29,7 +29,7 @@ public class AccountManage {
 	private final String ACCOUNT = "account";
 	private final String PID = "pid";
 	private final String EMAIL = "email";
-	private final String SYNC = "sync";
+	private final String STATUS = "status";
 
 	private List<Account> accounts;
 	private Context context;
@@ -69,30 +69,30 @@ public class AccountManage {
 		return accounts;
 	}
 
-	public Account getAccountSync() {
+	public Account getAccountActivated() {
 		for (Account acc : accounts) {
-			if (acc.getSync() == Account.SYNC_ON)
+			if (acc.getStatus() == Account.ACTIVATED)
 				return acc;
 
 		}
 		return null;
 	}
 
-	public void setAccountSync(Account account) {
+	public void setAccountActivated(Account account) {
 		boolean isExists = false;
 		String email = account.getEmail();
 		for (Account acc : accounts) {
 			if (acc.getEmail().equalsIgnoreCase(email)) {
-				account.setSync(Account.SYNC_ON);
+				account.setStatus(Account.ACTIVATED);
 				isExists = true;
 			} else {
-				if (acc.getSync() == Account.SYNC_ON)
-					acc.setSync(Account.SYNC_OFF);
+				if (acc.getStatus() == Account.ACTIVATED)
+					acc.setStatus(Account.INACTIVATED);
 			}
 		}
 
 		if (isExists == false) {
-			account.setSync(Account.SYNC_ON);
+			account.setStatus(Account.ACTIVATED);
 			accounts.add(account);
 		}
 		save();
@@ -132,9 +132,9 @@ public class AccountManage {
 				serializer.startTag("", EMAIL);
 				serializer.text(acc.getEmail());
 				serializer.endTag("", EMAIL);
-				serializer.startTag("", SYNC);
-				serializer.text(String.valueOf(acc.getSync()));
-				serializer.endTag("", SYNC);
+				serializer.startTag("", STATUS);
+				serializer.text(String.valueOf(acc.getStatus()));
+				serializer.endTag("", STATUS);
 				serializer.endTag("", ACCOUNT);
 			}
 			serializer.endTag("", ACCOUNTS);
@@ -184,8 +184,8 @@ public class AccountManage {
 				account.setPid(Long.parseLong(builder.toString()));
 			} else if (localName.equalsIgnoreCase(EMAIL)) {
 				account.setEmail(builder.toString());
-			} else if (localName.equalsIgnoreCase(SYNC)) {
-				account.setSync(Integer.parseInt(builder.toString()));
+			} else if (localName.equalsIgnoreCase(STATUS)) {
+				account.setStatus(Integer.parseInt(builder.toString()));
 			}
 
 			builder.setLength(0);

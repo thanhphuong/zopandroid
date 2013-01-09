@@ -52,16 +52,12 @@ public class AccountManageAdapter extends ArrayAdapter<Account> {
 			return null;
 
 		viewHolder.text.setText(item.getEmail());
-		switch (item.getSync()) {
-		case Account.SYNC_ERROR:
-			viewHolder.statusSync.setText(R.string.sync_error);
-			viewHolder.iconSync.setVisibility(View.INVISIBLE);
-			break;
-		case Account.SYNC_ON:
+		switch (item.getStatus()) {		
+		case Account.ACTIVATED:
 			viewHolder.statusSync.setText(R.string.sync_on);
 			viewHolder.iconSync.setVisibility(View.VISIBLE);
 			break;
-		case Account.SYNC_OFF:
+		case Account.INACTIVATED:
 			viewHolder.statusSync.setText(R.string.sync_off);
 			viewHolder.iconSync.setVisibility(View.INVISIBLE);
 			break;

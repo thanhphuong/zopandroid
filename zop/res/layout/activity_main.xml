@@ -74,32 +74,6 @@
                     android:gravity="center_vertical|right"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp" >
-
-                    <LinearLayout
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingLeft="10dp" >
-
-                        <TextView
-                            android:id="@+id/latitude"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="lat : 10.843452" 
-                            android:textSize="12dp"
-                            android:textColor="#00F"/>
-
-                        <TextView
-                            android:id="@+id/longitude"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="lon: 106.843452" 
-                            android:textSize="12dp"
-                            android:textColor="#00F"/>
-                    </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"

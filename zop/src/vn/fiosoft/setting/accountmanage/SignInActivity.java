@@ -42,9 +42,9 @@ public class SignInActivity extends Activity implements OnClickListener {
 			HttpConnection connection = new HttpConnection();
 			int result = connection.login(email, password);
 			if (result > 0){
-				Account account  = new Account(result,email, Account.SYNC_ON);
+				Account account  = new Account(result,email, Account.ACTIVATED);
 				AccountManage accountManage = new AccountManage(this);
-				accountManage.setAccountSync(account);
+				accountManage.setAccountActivated(account);
 				finish();
 				return;
 			}

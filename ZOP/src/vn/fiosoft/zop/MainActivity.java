@@ -6,6 +6,8 @@ import vn.fiosoft.feature.FeatureActivity;
 import vn.fiosoft.http.HttpConnection;
 import vn.fiosoft.service.ZOPApplication;
 import vn.fiosoft.setting.SettingActivity;
+import vn.fiosoft.setting.accountmanage.Account;
+import vn.fiosoft.setting.accountmanage.AccountManage;
 import vn.fiosoft.zop.gps.GPSTracker;
 import vn.fiosoft.zop.gps.MapItemizedOverlay;
 import android.content.Intent;
@@ -17,6 +19,8 @@ import vn.fiosoft.common.Util;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -38,6 +42,10 @@ public class MainActivity extends MapActivity implements OnClickListener {
 	private ImageButton mCurrentLocationButton;
 	private ImageButton mFeaturesButton;
 
+	private TextView mNameTextView;
+
+	private Account mAccount;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +57,7 @@ public class MainActivity extends MapActivity implements OnClickListener {
 		mCurrentLocationButton = (ImageButton) findViewById(R.id.my_location);
 		mSettingsButton = (ImageButton) findViewById(R.id.settings);
 		mFeaturesButton = (ImageButton) findViewById(R.id.features);
+		mNameTextView = (TextView) findViewById(R.id.name);
 
 		mCurrentLocationButton.setOnClickListener(this);
 		mSettingsButton.setOnClickListener(this);
@@ -68,8 +77,20 @@ public class MainActivity extends MapActivity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		loadAccount();
 		Location myLocation = getMyLocation();
-		showMyLocation(myLocation, true);
+		showMyLocation(myLocation, true);		
+	}
+
+	protected void loadAccount() {
+		// load data
+		AccountManage accountManage = new AccountManage(this);
+		mAccount = accountManage.getAccountActivated();
+		if (mAccount == null) {
+			mNameTextView.setText("no account");
+		} else {
+			mNameTextView.setText(mAccount.getEmail());
+		}
 	}
 
 	protected Location getMyLocation() {
@@ -136,9 +157,9 @@ public class MainActivity extends MapActivity implements OnClickListener {
 	}
 
 	public void shareLocation(int share) {
-		Util util = new Util();		
+		Util util = new Util();
 		if (util.checkNetwork(this) == false) {
-			//not network
+			// not network
 			return;
 		}
 		switch (share) {

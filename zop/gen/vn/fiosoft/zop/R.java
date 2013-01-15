@@ -38,37 +38,36 @@ public final class R {
         public static final int navigation_next_item=0x7f02000f;
         public static final int navigation_next_item_black=0x7f020010;
         public static final int rating_important=0x7f020011;
-        public static final int settings=0x7f020012;
-        public static final int social_group=0x7f020013;
-        public static final int social_person=0x7f020014;
-        public static final int transparent_button_bg=0x7f020015;
-        public static final int white_button_bg=0x7f020016;
-        public static final int white_half_alpha=0x7f020017;
+        public static final int round_button=0x7f020012;
+        public static final int settings=0x7f020013;
+        public static final int social_group=0x7f020014;
+        public static final int social_person=0x7f020015;
+        public static final int transparent_button_bg=0x7f020016;
+        public static final int white_button_bg=0x7f020017;
+        public static final int white_half_alpha=0x7f020018;
     }
     public static final class id {
         public static final int create_new_account=0x7f090001;
-        public static final int email=0x7f090010;
-        public static final int features=0x7f09000f;
-        public static final int friends=0x7f090009;
-        public static final int groups=0x7f09000b;
-        public static final int icon_sync=0x7f090013;
-        public static final int image=0x7f090014;
-        public static final int label=0x7f090016;
+        public static final int email=0x7f09000e;
+        public static final int icon_sync=0x7f090011;
+        public static final int image=0x7f090012;
+        public static final int label=0x7f090014;
         public static final int latitude=0x7f090002;
-        public static final int layers=0x7f09000c;
         public static final int loign=0x7f090007;
         public static final int longitude=0x7f090003;
         public static final int mapview=0x7f090008;
-        public static final int menu_settings=0x7f090017;
-        public static final int more_item=0x7f090015;
+        public static final int menu_settings=0x7f090015;
+        public static final int more_item=0x7f090013;
+        public static final int more_list=0x7f09000a;
         public static final int my_location=0x7f09000d;
-        public static final int name=0x7f09000a;
+        public static final int name=0x7f090009;
         public static final int password=0x7f090006;
-        public static final int settings=0x7f09000e;
+        public static final int settings=0x7f09000b;
+        public static final int settings1=0x7f09000c;
         public static final int share_location=0x7f090004;
         public static final int sign_in=0x7f090000;
-        public static final int status_sync=0x7f090012;
-        public static final int text=0x7f090011;
+        public static final int status_sync=0x7f090010;
+        public static final int text=0x7f09000f;
         public static final int youraccount=0x7f090005;
     }
     public static final class layout {

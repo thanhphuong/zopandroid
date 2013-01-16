@@ -32,12 +32,7 @@
             android:label="@string/settings"
             android:screenOrientation="portrait"
             android:theme="@style/LargeTitleTheme" />
-        <activity
-            android:name="vn.fiosoft.feature.FeatureActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="@string/features"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog" />
+        
         <activity
             android:name="vn.fiosoft.setting.accountmanage.AccountManageActivity"
             android:configChanges="orientation|keyboardHidden"

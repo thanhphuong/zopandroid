@@ -3,7 +3,8 @@ package vn.fiosoft.zop;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.fiosoft.feature.FeatureActivity;
+import vn.fiosoft.common.Constants;
+import vn.fiosoft.common.Util;
 import vn.fiosoft.http.HttpConnection;
 import vn.fiosoft.service.ZOPApplication;
 import vn.fiosoft.setting.SettingActivity;
@@ -11,23 +12,19 @@ import vn.fiosoft.setting.accountmanage.Account;
 import vn.fiosoft.setting.accountmanage.AccountManage;
 import vn.fiosoft.zop.gps.GPSTracker;
 import vn.fiosoft.zop.gps.MapItemizedOverlay;
+import android.R.integer;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
-import vn.fiosoft.common.Constants;
-import vn.fiosoft.common.Util;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -35,7 +32,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
-public class MainActivity extends MapActivity implements OnClickListener, OnItemClickListener {
+public class MainActivity extends MapActivity implements OnClickListener {
 
 	private final int ZOOM_DEFAULT = 18;
 
@@ -45,16 +42,11 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 	private MapItemizedOverlay mapItemizedOverlay;
 	private GPSTracker mGPS;
 
-	private Button mSettingsButton;
-	private ImageButton mCurrentLocationButton;	
+	private ImageButton mCurrentLocationButton;
 
 	private TextView mNameTextView;
 
 	private Account mAccount;
-
-	private ListView mPopupMenu;
-	private List<MoreMenuItem> items;
-	private boolean showPopupMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,19 +55,13 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 
 		ZOPApplication.start();
 
-		mPopupMenu = (ListView) findViewById(R.id.more_list);
 		mapView = (MapView) findViewById(R.id.mapview);
 		mCurrentLocationButton = (ImageButton) findViewById(R.id.my_location);
-		mSettingsButton = (Button) findViewById(R.id.settings);		
 		mNameTextView = (TextView) findViewById(R.id.name);
 
 		mCurrentLocationButton.setOnClickListener(this);
-		mSettingsButton.setOnClickListener(this);		
 
 		mapView.setBuiltInZoomControls(true);
-
-		mPopupMenu.setVisibility(View.GONE);
-		showPopupMenu = false;
 
 		// map view
 		mapOverlays = mapView.getOverlays();
@@ -92,22 +78,6 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 		loadAccount();
 		Location myLocation = getMyLocation();
 		showMyLocation(myLocation, true);
-		refreshListAdapter();
-	}
-
-	public void refreshListAdapter() {
-		items = new ArrayList<MoreMenuItem>();
-
-		// create items, when add new item, you must change height of list with
-		// 1 item = 45dp + 1dp border
-		Resources res = getResources();
-		items.add(new MoreMenuItem(res.getString(R.string.clear_map), false));
-		items.add(new MoreMenuItem(res.getString(R.string.settings), true));
-		items.add(new MoreMenuItem(res.getString(R.string.help), true));
-
-		mPopupMenu.setAdapter(new MoreListAdapter(this, items));
-		mPopupMenu.setOnItemClickListener(this);
-
 	}
 
 	protected void loadAccount() {
@@ -170,21 +140,6 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 			showMyLocation(myLocation, true);
 		}
 
-		
-
-		if (id == R.id.settings) {
-			// startActivity(new Intent(this, SettingActivity.class));
-			// }
-			// if (id == R.id.more) {
-			if (showPopupMenu == true) {
-				showPopupMenu = false;
-				mPopupMenu.setVisibility(View.GONE);
-			} else {
-				showPopupMenu = true;
-				mPopupMenu.setVisibility(View.VISIBLE);
-			}
-
-		}
 	}
 
 	public void updateLocation(Location location) {
@@ -225,14 +180,57 @@ public class MainActivity extends MapActivity implements OnClickListener, OnItem
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		if (position == 1) {
-			startActivity(new Intent(this, SettingActivity.class));
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == R.id.settings){
+			startActivity(new Intent(this,SettingActivity.class));
 		}
+		
+		if (id == R.id.layers){
+			showLayerDialog();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	private List<Integer> mSelectedItems;
+	public void showLayerDialog() {
+		mSelectedItems = new ArrayList<Integer>();  
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    
+	    builder.setTitle(R.string.layers)
+	           .setMultiChoiceItems(R.array.layers, null,
+	                      new DialogInterface.OnMultiChoiceClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int which,
+	                       boolean isChecked) {
+	                   if (isChecked) {	    
+	                       mSelectedItems.add(which);
+	                   } else if (mSelectedItems.contains(which)) {	                     
+	                       mSelectedItems.remove(Integer.valueOf(which));
+	                   }
+	               }
+	           })	    
+	           .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	            	   	            	  
+	                   
+	               }
+	           })
+	           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	                 
+	               }
+	           });
 
-		showPopupMenu = false;
-		mPopupMenu.setVisibility(View.GONE);
-
+	    builder.show();
 	}
 
 }

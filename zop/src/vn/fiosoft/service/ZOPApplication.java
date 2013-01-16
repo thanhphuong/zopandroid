@@ -4,11 +4,8 @@ import android.app.Application;
 import android.content.Intent;
 
 public class ZOPApplication extends Application {
-
-	private static int mMaxResults = 3;
-
+	
 	private static Boolean isRuning = false;
-	private Boolean isListening = false;
 	public static ZOPApplication mInstance;
 
 	@Override

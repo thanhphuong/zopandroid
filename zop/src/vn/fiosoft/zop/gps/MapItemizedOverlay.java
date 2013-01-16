@@ -3,18 +3,12 @@ package vn.fiosoft.zop.gps;
 import java.util.ArrayList;
 
 import vn.fiosoft.common.Constants;
-import vn.fiosoft.http.HttpConnection;
 import vn.fiosoft.zop.MainActivity;
 import vn.fiosoft.zop.R;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-
 import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 public class MapItemizedOverlay extends ItemizedOverlay<OverlayItem>

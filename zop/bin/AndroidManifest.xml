@@ -23,9 +23,9 @@
         android:required="true" />
 
     <application
+        android:name="vn.fiosoft.service.ZOPApplication"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_name" >
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -38,7 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+		
+        <service android:name="vn.fiosoft.service.ZOPService" />
+        
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBBGEyVEuodxML6X-1tJkcMbkztD2WbyJ4" />

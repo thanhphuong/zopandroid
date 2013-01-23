@@ -38,6 +38,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+         <activity
+            android:name="vn.fiosoft.setting.SettingActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
+        <activity
+            android:name="vn.fiosoft.setting.accountmanage.AccountManageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/manage_accounts"
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
+        <activity
+            android:name="vn.fiosoft.setting.accountmanage.SignInActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/sign_in"
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
+        <activity
+            android:name="vn.fiosoft.setting.AboutActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/about"
+            android:screenOrientation="portrait"
+            android:theme="@style/LargeTitleTheme" />
 		
         <service android:name="vn.fiosoft.service.ZOPService" />
         

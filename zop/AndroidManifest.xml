@@ -3,24 +3,16 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
-
-    <permission
-        android:name="com.example.mapdemo.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
+    <uses-sdk android:minSdkVersion="8" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.example.mapdemo.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
+    <meta-data
+        android:name="com.google.android.maps.v2.API_KEY"
+        android:value="0VmYekii_sHSm-cDmOsiMlXDpdqMEQ0-Q0XKSfQ" />
 
     <application
         android:name="vn.fiosoft.service.ZOPApplication"
@@ -38,8 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-         <activity
+        <activity
             android:name="vn.fiosoft.setting.SettingActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/settings"
@@ -63,12 +54,10 @@
             android:label="@string/about"
             android:screenOrientation="portrait"
             android:theme="@style/LargeTitleTheme" />
-		
+
         <service android:name="vn.fiosoft.service.ZOPService" />
-        
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBBGEyVEuodxML6X-1tJkcMbkztD2WbyJ4" />
+
+        <uses-library android:name="com.google.android.maps" />
     </application>
 
 </manifest>

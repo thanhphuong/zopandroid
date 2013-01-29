@@ -145,25 +145,24 @@ containing a value of this type.
         public static final int device_access_location_found=0x7f020004;
         public static final int ic_action_overflow=0x7f020005;
         public static final int ic_action_refresh=0x7f020006;
-        public static final int ic_action_search=0x7f020007;
-        public static final int ic_laucher=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int location_directions=0x7f02000a;
-        public static final int location_map=0x7f02000b;
-        public static final int location_place=0x7f02000c;
-        public static final int map_button_bg=0x7f02000d;
-        public static final int marker=0x7f02000e;
-        public static final int marker2=0x7f02000f;
-        public static final int menu=0x7f020010;
-        public static final int navigation_next_item=0x7f020011;
-        public static final int navigation_next_item_black=0x7f020012;
-        public static final int rating_important=0x7f020013;
-        public static final int settings=0x7f020014;
-        public static final int social_group=0x7f020015;
-        public static final int social_person=0x7f020016;
-        public static final int transparent_button_bg=0x7f020017;
-        public static final int white_button_bg=0x7f020018;
-        public static final int white_half_alpha=0x7f020019;
+        public static final int ic_laucher=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int location_directions=0x7f020009;
+        public static final int location_map=0x7f02000a;
+        public static final int location_place=0x7f02000b;
+        public static final int map_button_bg=0x7f02000c;
+        public static final int marker=0x7f02000d;
+        public static final int marker2=0x7f02000e;
+        public static final int menu=0x7f02000f;
+        public static final int navigation_next_item=0x7f020010;
+        public static final int navigation_next_item_black=0x7f020011;
+        public static final int rating_important=0x7f020012;
+        public static final int settings=0x7f020013;
+        public static final int social_group=0x7f020014;
+        public static final int social_person=0x7f020015;
+        public static final int transparent_button_bg=0x7f020016;
+        public static final int white_button_bg=0x7f020017;
+        public static final int white_half_alpha=0x7f020018;
     }
     public static final class id {
         public static final int create_new_account=0x7f050005;
@@ -171,7 +170,7 @@ containing a value of this type.
         public static final int icon_sync=0x7f05000d;
         public static final int label=0x7f05000e;
         public static final int layers=0x7f050010;
-        public static final int map=0x7f050006;
+        public static final int mapview=0x7f050006;
         public static final int my_location=0x7f050008;
         public static final int name=0x7f050007;
         public static final int none=0x7f050000;
@@ -195,8 +194,7 @@ containing a value of this type.
         public static final int item_setting_list=0x7f030006;
     }
     public static final class menu {
-        public static final int activity_main=0x7f090000;
-        public static final int menu_main=0x7f090001;
+        public static final int menu_main=0x7f090000;
     }
     public static final class string {
         public static final int about=0x7f060017;

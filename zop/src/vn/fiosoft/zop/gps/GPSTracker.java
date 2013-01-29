@@ -146,21 +146,21 @@ public class GPSTracker extends Service implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		
-//		if (this.location == null){
-//			this.location = location;
-//			mContext.updateLocation(location);
-//			return;
-//		}
-//		
-//		if (this.location.distanceTo(location) >= MIN_DISTANCE_CHANGE_FOR_UPDATES){
-//			this.location = location;
-//			mContext.updateLocation(location);
-//		}else{
-//			if (this.location.getAccuracy() < location.getAccuracy()){
-//				this.location = location;
-//				mContext.updateLocation(location);
-//			}
-//		}
+		if (this.location == null){
+			this.location = location;
+			mContext.updateLocation(location);
+			return;
+		}
+		
+		if (this.location.distanceTo(location) >= MIN_DISTANCE_CHANGE_FOR_UPDATES){
+			this.location = location;
+			mContext.updateLocation(location);
+		}else{
+			if (this.location.getAccuracy() < location.getAccuracy()){
+				this.location = location;
+				mContext.updateLocation(location);
+			}
+		}
 			
 		
 	}
